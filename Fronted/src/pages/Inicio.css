@@ -1,0 +1,22 @@
+.Inicio {
+    width: 100%;
+    height: calc(100vh - 80px);
+    position: relative;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.Inicio h1 {
+    text-align: center;
+    font-size: 5vw;
+}
+
+.Inicio .banner {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    width: 80%;
+}
