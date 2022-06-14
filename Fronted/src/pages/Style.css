@@ -1,0 +1,42 @@
+.error404 {
+    display:flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 80px);
+}
+
+.error404 img {
+    width: 300px;
+    margin: 5rem;
+}
+
+.error404 h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.error404 p {
+    font-size: 18px;
+}
+
+/* Inicio */
+.integrantes-content {
+    padding-left: 0;
+}
+.item {
+    display:flex;
+    flex-flow: column;
+    list-style: none;
+}
+
+.item h6 {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+
+.content {
+    z-index: -1;
+}

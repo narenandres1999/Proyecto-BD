@@ -8,18 +8,18 @@
       "type": "image/x-icon"
     },
     {
-      "src": "app-icon512.png",
+      "src": "app-icon.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "app-icon512.png",
+      "src": "app-icon.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#EF4665",
+  "theme_color": "#000000",
   "background_color": "#ffffff"
 }

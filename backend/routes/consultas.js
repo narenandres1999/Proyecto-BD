@@ -1,6 +1,6 @@
 const express = require ("express");
 const router = express.Router();
-const db = require("../function.collections/consulta.queries");
+const db = require("../function.collections/consultas");
 const val = require("../validators/consultas");
 router.use(express.json());
 router.use(express.urlencoded({extended:true}));

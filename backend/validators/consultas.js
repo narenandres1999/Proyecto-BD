@@ -22,9 +22,9 @@ const validateCreate = [ // encargado,motivo,fecha_consulta,cod_paciente,genid,n
     .not()
     .isEmpty().withMessage("el codigo del estudiante o documento no puede estar vacio")
     .isNumeric().withMessage("solo se permiten valores numericos"),
-    check('genid')
+    check('genero')
     .exists()
-    .isNumeric().withMessage("Por favor ingrese un valor valido para el genero")
+    .notEmpty().withMessage("Por favor ingrese un valor valido para el genero")
     .custom((value,{req})=>{
         if (value <= 0){
             throw new Error("Genero incorrecto")

@@ -1,34 +1,34 @@
 import React, { Component } from 'react'
-import Navbar from './components/Navbar';
+import './App.css'
 
-// Import REACT-ROUTER-DOM
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// Import reactDOM
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
-// Importando las paginas
-import Inicio from './pages/Inicio';
-import RegistroConsultas from './pages/RegistroConsultas';
-import RegistroMedicamentos from './pages/RegistroMedicamentos';
-import AcercaDe from './pages/AcercaDe';
-import ErrorPage from './pages/ErrorPage';
+// Import routes : Pages
+import Inicio from './pages/Inicio'
+import Datos from './pages/Datos'
+import Consultas from './pages/Consultas/Consultas'
+import Medicamentos from './pages/Medicamentos'
+import Error from './pages/Error'
+
+// Import components
+import Navbar from './components/navbar/Navbar'
 
 export default class App extends Component {
-
-  // Navbar :: Menu
-  render() {
-    return (
-      <div>
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path='/' exact element={<Inicio />} />
-            <Route path='/registro-de-consultas' element={<RegistroConsultas />} />
-            <Route path='/registro-de-medicamentos' element={<RegistroMedicamentos />} />
-            <Route path='/acerca-de' element={<AcercaDe />} />
-            <Route path='*' element={<ErrorPage />} />
-          </Routes>
-        </Router>
-      </div>
-    )
-  }
+    render() {
+        return (
+            <Router>
+                <Navbar />
+                <div className='container'>
+                    <Routes>
+                        <Route path='/' exact element={<Inicio />} />
+                        <Route path='/datos' element={<Datos />} />                        
+                        <Route path='/consultas' element={<Consultas />} />
+                        <Route path='/medicamentos' element={<Medicamentos />} />
+                        <Route path='*' element={<Error />} />
+                    </Routes>
+                </div>
+            </Router>
+        )
+    }
 }
-

@@ -1,23 +1,35 @@
 const db = require("../database/db");
 // enpoints para la ruta "/"
 //metodo que me deuelve todas las consultas registradas
+ 
 const getCons = (req,res)=>{
+    let total = 0;
+    console.log({req,res})
     db.query
-    ('SELECT * FROM (consultas NATURAL JOIN paciente NATURAL JOIN genero) AS res WHERE res.borrar = false',
-        (err,result)=>{
+    ('SELECT * FROM consulta_total where borrar = false ORDER BY num_consulta ASC',
+        (err,items)=>{
         if (err){
             console.log ("ha ocurrido un error");
             res.json({"message":"ha ocurrio un error","error":err});
         }
-        res.json(result.rows);
+        db.query('select count (num_consulta) as total from consulta_total where borrar = false;',(err,result)=>{
+            if (err){
+                console.log ("ha ocurrido un error");
+                res.json({"message":"ha ocurrio un error","error":err});
+            }
+            total = parseInt(result.rows[0].total);
+            res.json({"items":items.rows,"total":total})
+        })
     })
+
+    
 };
 // Agrega consultas nuevas a la base de datos
 const postCons = (req,res)=>{
-    const {encargado,motivo,fecha_consulta,cod_paciente,genid,nombre,telefono} = req.body;
+    const {encargado,motivo,fecha_consulta,cod_paciente,genero,nombre,telefono} = req.body;
     // addconsulta (encargado,motivo,fecha_consulta,cod_paciente,genid,nombre,telefono)
     db.query('CALL addconsulta($1,$2,$3,$4,$5,$6,$7);',
-    [encargado,motivo,fecha_consulta,cod_paciente,genid,nombre,telefono],(err)=>{
+    [encargado,motivo,fecha_consulta,cod_paciente,genero,nombre,telefono],(err)=>{
     if (err){
         res.json(err);
     }
@@ -29,7 +41,7 @@ const postCons = (req,res)=>{
 // Obtiene la informacion de una consulta seleccionada por id
 const getOneConsulta = (req,res)=>{
     const id = req.params.num_consulta;
-    db.query("SELECT * FROM (SELECT * FROM consultas NATURAL JOIN paciente NATURAL JOIN genero)AS res WHERE res.num_consulta = $1 AND res.borrar = false;",[id],(err,result)=>{
+    db.query("SELECT * FROM consulta_total WHERE num_consulta = $1 AND borrar = false;",[id],(err,result)=>{
         if (err){
             res.json(err);
         }
@@ -39,9 +51,9 @@ const getOneConsulta = (req,res)=>{
 // num integer,encar varchar,mot varchar,fecha date,cod integer,gid integer,nom varchar,tele varchar
 const putOneCons = (req,res)=>{
     const id = req.params.num_consulta;
-    const {encargado,motivo,fecha_consulta,cod_paciente,genid,nombre,telefono} = req.body;
+    const {encargado,motivo,fecha_consulta,cod_paciente,genero,nombre,telefono} = req.body;
     db.query("call update_consulta ($1,$2,$3,$4,$5,$6,$7,$8);",
-    [id,encargado,motivo,fecha_consulta,cod_paciente,genid,nombre,telefono],(err,result)=>{
+    [id,encargado,motivo,fecha_consulta,cod_paciente,genero,nombre,telefono],(err,result)=>{
         if (err){
             res.json({"message":"ha ocurrido algo","message":err});
         } 
@@ -59,7 +71,7 @@ const deleteOneCons = (req,res)=>{
 // Agrega los medicamentos que se seleccionaron
 const getMedCons = (req,res)=>{
     const id = req.params.num_consulta;
-    db.query("select * from (cons_med natural join medicamentos) as res where num_consulta = $1;",
+    db.query("select * from (cons_med natural join medicamentos) as res where num_consulta = $1 order by id_med asc;",
     [id],(err,result)=>{
         if (err){
             res.json(err)

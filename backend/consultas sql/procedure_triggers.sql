@@ -1,6 +1,6 @@
 -- añade consultas con todas sus variantes
 create or replace procedure addConsulta
-(encar varchar,mot varchar,fecha date,cod integer,gid integer,nom varchar,tele varchar)
+(encar varchar,mot varchar,fecha date,cod integer,gen varchar,nom varchar,tele varchar)
 as 
 $consulta$										
 begin
@@ -10,8 +10,8 @@ begin
 	insert into consultas(encargado,motivo,fecha_consulta,cod_paciente) values 
 	(encar,mot,fecha,cod);
 	else
-	insert into paciente (cod_paciente,telefono,genid,nombre) values 
-	(cod,tele,gid,nom);
+	insert into paciente (cod_paciente,telefono,genero,nombre) values 
+	(cod,tele,gen,nom);
 	insert into consultas(encargado,motivo,fecha_consulta,cod_paciente) values 
 	(encar,mot,fecha,cod);
 	end if;
@@ -33,11 +33,11 @@ for each row EXECUTE function descontarstock();
 
 -- procedimiento que me actualiza una consulta
 create or replace procedure update_consulta
-(num integer,encar varchar,mot varchar,fecha date,cod integer,gid integer,nom varchar,tele varchar)as 
+(num integer,encar varchar,mot varchar,fecha date,cod integer,gen varchar,nom varchar,tele varchar)as 
 $$
 begin
 	update consultas set encargado = encar,motivo = mot, fecha_consulta = fecha where num_consulta = num;
-	update paciente set genid = gid,nombre = nom,telefono = tele where cod_paciente = cod;
+	update paciente set genero = gen,nombre = nom,telefono = tele where cod_paciente = cod;
 commit;
 end;
 $$ language plpgsql;

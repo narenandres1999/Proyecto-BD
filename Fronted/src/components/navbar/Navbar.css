@@ -1,0 +1,90 @@
+.navbar {
+    z-index: 99999;
+    height: 80px;
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+/* Title : Logo*/
+.navbar .nav-title a {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #384359;
+}
+
+.navbar .nav-title img {
+    width: 35px;
+    margin-right: 1rem;;
+}
+
+/* Menu bars */
+.menu-icon-toggle {
+    font-size: 2rem;
+    background: none;
+    color: #90929D;
+    transition: all .3s ease
+}
+
+.menu-icon-toggle:hover {
+    color: #EF4665;
+}
+
+.nav-menu {
+    width: 300px;
+    position: fixed;
+    height: calc(100vh - 80px);
+    transition: 850ms;
+    left: -100%;
+    background: #fff;
+    border-radius: 0px 0px 15px 0px;
+    border-right: 2px solid rgba(0,0,0,0.03);
+}
+
+.nav-menu.active {
+    left: 0;
+    transition: 350ms;
+}
+
+/* Sidebar */
+.nav-menu-items {
+    width:90%;    
+    list-style: none;
+    padding-left: 0;
+}
+
+
+.nav-text {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0px 0px;
+    align-items: center;
+    height: 75px;
+}
+
+.nav-text a {
+    width:100%;
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #90929D;
+    height: 60px;
+    padding: 0px 20px;
+    border-radius: 0px 8px 8px 0px;
+    transition: all 0.3s ease;
+}
+
+.nav-text a:hover {
+    background: #EF4665;
+    color: #fff;
+}
+
+span {
+    margin-left: 1rem;
+}

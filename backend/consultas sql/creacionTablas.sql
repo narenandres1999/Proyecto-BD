@@ -1,20 +1,17 @@
-create table Genero (
-sexo varchar not null,
-genID serial primary key 
-);
+create sequence serial_consulta start with 1 increment by 1;
+create sequence serial_med start with 1 increment by 1;
 
 create table Paciente (
 	cod_paciente integer,
 	nombre varchar not null,
-	genID integer,
+	genero varchar,
 	telefono varchar,
 	eliminado boolean default false,
-	primary key(cod_paciente),
-	foreign key (genID) references Genero(genID)
+	primary key(cod_paciente)
 );
 
 create table Consultas(
-	num_consulta serial,
+	num_consulta integer default nextval('serial_consulta'),
 	encargado varchar not null,
 	motivo varchar,
 	fecha_consulta date not null,
@@ -24,11 +21,11 @@ create table Consultas(
 	foreign key(cod_paciente) references Paciente(cod_paciente)
 );
 create table Medicamentos(
-	id_med serial primary key,
+	id_med integer primary key default nextval('serial_med'),
 	cod_med varchar not null,
 	med_nombre varchar not null,
 	fecha_ven date,
-	stock integer check (cantidad >= 0),
+	stock integer check (stock >= 0),
 	borrado boolean default false
 );
 
