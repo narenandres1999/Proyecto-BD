@@ -36,13 +36,11 @@ const FormEditar = (props) => {
             ...form,
             genero: genero.value
         })
-        props.handleChild(form)
     }
     const changeMedicamentos = (med) => {
 
         console.log(form)
         setSelected(med.value)
-        props.handleChild(form)
     }
     const addMed = () => {
         let newMedicamentos = form.medicamentos;
@@ -54,7 +52,6 @@ const FormEditar = (props) => {
             ...form,
             medicamentos: newMedicamentos
         })
-        props.handleChild(form)
     }
     const eliminarMed = (med) => {
         let newMedicamentos = []
@@ -67,7 +64,6 @@ const FormEditar = (props) => {
             ...form,
             medicamentos: newMedicamentos
         })
-        props.handleChild(form)
     }
 
     return (
@@ -222,7 +218,7 @@ const FormEditar = (props) => {
                         </thead>
                         <tbody>
                             {form.medicamentos.map((med) => (
-                                <tr >
+                                <tr key = {med.id_med}>
                                     <td>{med.id_med}</td>
                                     <td>{med.cod_med}</td>
                                     <td>{med.med_nombre}</td>
@@ -239,7 +235,7 @@ const FormEditar = (props) => {
                 <ModalFooter>
                     <Button
                         color="primary"
-                        onClick={() => props.guardar()}
+                        onClick={() => props.guardar(form)}
                     >
                         Guardar
                     </Button>

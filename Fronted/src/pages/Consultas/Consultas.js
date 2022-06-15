@@ -13,9 +13,9 @@ const ax = require("../../api");
 class App extends Component {
     state = {
         data: [],
-        optionsMeds:[{
-            value:"",
-            label:""
+        optionsMeds: [{
+            value: "",
+            label: ""
         }],
         currentpage: 0,
         limitItems: 10,
@@ -34,19 +34,17 @@ class App extends Component {
             medicamentos: []
         },
     };
-
-
     componentDidMount() {
         this.obtenerDatos();
         this.optionMed();
 
     }
-    optionMed = ()=>{
-        ax.getMeds().then((res)=>{
-            let options =[];
+    optionMed = () => {
+        ax.getMeds().then((res) => {
+            let options = [];
             let json = {};
-            res.data.map((item)=>{
-                json = {"value":item,"label":item.med_nombre};
+            res.data.map((item) => {
+                json = { "value": item, "label": item.med_nombre };
                 options.push(json)
             })
             this.setState({
@@ -69,9 +67,9 @@ class App extends Component {
     }
     actualizarTabla = () => {
         this.setState({
-            data:[]
+            data: []
         })
-        setTimeout (this.obtenerDatos(),3000)
+        setTimeout(this.obtenerDatos(), 3000)
     }
     mostrarModalActualizar = (dato) => {
         ax.getMedCons(dato.num_consulta).then(res => {
@@ -121,51 +119,57 @@ class App extends Component {
     cerrarModalInsertar = () => {
         this.setState({ modalInsertar: false });
     };
-    editar = () => {
+    editar = (form) => {
         console.log(this.state.form)
         const body = {
-            "encargado": this.state.form.encargado,
-            "motivo": this.state.form.motivo,
-            "fecha_consulta": this.state.form.fecha_consulta,
-            "cod_paciente": this.state.form.cod_paciente,
-            "genero": this.state.form.genero,
-            "nombre": this.state.form.nombre,
-            "telefono": this.state.form.telefono
+            "encargado": form.encargado,
+            "motivo": form.motivo,
+            "fecha_consulta": form.fecha_consulta,
+            "cod_paciente": form.cod_paciente,
+            "genero": form.genero,
+            "nombre": form.nombre,
+            "telefono": form.telefono
         }
-        ax.putCons(this.state.form.num_consulta, body)
-        ax.delMedCons(this.state.form.num_consulta).then(()=>{
-            this.state.form.medicamentos.map(item=>{
-            
-                const med = {
-                    id_med : item.id_med,
-                    cantidad: parseInt(item.cantidad)
-                }
-                ax.postMedCons(this.state.form.num_consulta,med)
-            })
+        ax.putCons(form.num_consulta, body).then(()=>{
+            this.setState({ modalActualizar: false });
+            this.actualizarTabla()
         })
-        this.setState({ modalActualizar: false });
-        this.actualizarTabla()
+        ax.delMedCons(form.num_consulta).then(() => {
+            if (form.medicamentos.length > 0) {
+                form.medicamentos.map(item => {
+
+                    const med = {
+                        id_med: item.id_med,
+                        cantidad: item.cantidad
+                    }
+                    ax.postMedCons(form.num_consulta, med)
+                })
+            }
+        })
     };
 
     eliminar = () => {
-        ax.delCons(this.state.form.num_consulta)
+        ax.delCons(this.state.form.num_consulta).then(() => {
+            this.cleanForm();
+            this.actualizarTabla();
+        })
         this.setState({ modalEliminar: false });
-        this.actualizarTabla();
     };
 
-    insertar = () => {
+    insertar = (form) => {
         const body = {
-            "encargado": this.state.form.encargado,
-            "motivo": this.state.form.motivo,
-            "fecha_consulta": this.state.form.fecha_consulta,
-            "cod_paciente": this.state.form.cod_paciente,
-            "genero": this.state.form.genero,
-            "nombre": this.state.form.nombre,
-            "telefono": this.state.form.telefono
+            "encargado": form.encargado,
+            "motivo": form.motivo,
+            "fecha_consulta": form.fecha_consulta,
+            "cod_paciente": form.cod_paciente,
+            "genero": form.genero,
+            "nombre": form.nombre,
+            "telefono": form.telefono
         }
-        ax.postCons(body)
+        ax.postCons(body).then(() => {
+            this.actualizarTabla();
+        })
         this.setState({ modalInsertar: false });
-        this.actualizarTabla();
     }
     handleChange = (e) => {
         this.setState({
@@ -214,7 +218,7 @@ class App extends Component {
                 </Modal>
                 <Modal isOpen={this.state.modalActualizar}>
                     <FormEditar
-                        optionsMed = {this.state.optionsMeds}
+                        optionsMed={this.state.optionsMeds}
                         encabezado={"Editar Registro"}
                         handleChild={this.handleChild}
                         item={this.state.form}
@@ -233,10 +237,10 @@ class App extends Component {
                             motivo: "",
                             fecha_consulta: "",
                             encargado: "",
-                            medicamentos:[]
+                            medicamentos: []
                         }
                         }
-                        optionsMed = {this.state.optionsMeds}
+                        optionsMed={this.state.optionsMeds}
                         encabezado={"Agregar Consultas"}
                         handleChild={this.handleChild}
                         cerrarModal={this.cerrarModalInsertar}
