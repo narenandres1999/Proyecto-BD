@@ -7,6 +7,9 @@ import {
 import { useState } from "react";
 import Select from 'react-select';
 import { MdEdit, MdDelete } from "react-icons/md";
+
+import '../../../pages/Table.css'
+
 const FormMedicamentos = (props) => {
     const [cantidad, setCantidad] = useState(0);
     const [selected, setSelected] = useState({});
@@ -19,6 +22,8 @@ const FormMedicamentos = (props) => {
         setCantidad(target.value)
     }
     const addMed = () => {
+        const int = parseInt(cantidad);
+        if (int > 0){
         let newMedicamentos = medicamentos;
         let nuevoMedicamento = {};
         nuevoMedicamento = selected;
@@ -26,33 +31,38 @@ const FormMedicamentos = (props) => {
         newMedicamentos.push(nuevoMedicamento);
         setMedicamentos(newMedicamentos);
         props.handleChild(medicamentos);
+        }
     }
     const eliminarMed = (med) => {
         let newMedicamentos = [];
         medicamentos.map(item => {
-            if (!(item.id_med === med.id_med && item.cantidad === med.cantidad )) {
+            if (!(item.id_med === med.id_med && item.cantidad === med.cantidad)) {
                 newMedicamentos.push(item);
             }
         })
         setMedicamentos(newMedicamentos);
         props.handleChild(newMedicamentos);
-        console.log(newMedicamentos)
     }
     return (
         <>
-            <Container>
-                <Select
-                    options={props.optionsMed}
-                    value={props.optionsMed.map(item => {
-                        if (item.value.id_med === selected.id_med) {
-                            return item
-                        }
-                    })}
-                    onChange={changeMedicamentos}
-                    className="form-control"
-                    name="medicamentos"
-                />
-                <FormGroup>
+            <Container fluid>
+            
+                <div className='medicamento'>
+                <label>Medicamento:</label>
+                    <br />
+                    <div className='medicamento-select'>
+                    <Select
+                        options={props.optionsMed}
+                        value={props.optionsMed.map(item => {
+                            if (item.value.id_med === selected.id_med) {
+                                return item
+                            }
+                        })}
+                        onChange={changeMedicamentos}
+                        className="select"
+                        name="medicamentos"
+                        placeholder='Seleccionar'
+                    />
                     <input
                         placeholder="Cantidad"
                         className="form-control"
@@ -61,16 +71,21 @@ const FormMedicamentos = (props) => {
                         onChange={handleChange}
                         value={cantidad}
                     />
-                </FormGroup>
                 <Button color="secondary" onClick={() => { addMed() }}>Añadir</Button>
-                <Table>
+
+                    </div>
+
+                </div>
+
+
+                <Table className='table table-borderless table-hover'>
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Codigo medicamento</th>
-                            <th>Nombre medicamento</th>
+                            <th>Codigo</th>
+                            <th>Nombre</th>
                             <th>Cantidad</th>
-                            <th>Fecha_Vencimiento</th>
+                            <th>Vencimiento</th>
                         </tr>
                     </thead>
                     <tbody>

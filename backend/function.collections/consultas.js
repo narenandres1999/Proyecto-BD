@@ -32,8 +32,14 @@ const postCons = (req,res)=>{
     if (err){
         res.json(err);
     }
-    res.json({"message":"se añadio con exito","result": result});
+    db.query('SELECT max(num_consulta) FROM consultas;',(err,result)=>{
+        if (err){
+            res.json(err);
+        }
+        res.json({"num_consulta":result.rows[0]})
     })
+    }
+    )
 };
 
 // Endpoints para la ruta /:num_consulta

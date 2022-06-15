@@ -1,5 +1,6 @@
 .navbar {
-    z-index: 99999;
+    z-index: 1;
+    background: #fff;
     height: 80px;
     display:flex;
     justify-content:space-between;
@@ -33,6 +34,7 @@
 }
 
 .nav-menu {
+    z-index: 1;
     width: 300px;
     position: fixed;
     height: calc(100vh - 80px);

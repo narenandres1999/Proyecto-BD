@@ -1,4 +1,6 @@
 import {
+    Col,
+    Row,
     Table,
     Button,
     Container,
@@ -28,155 +30,149 @@ const FormEditar = (props) => {
         { value: 'Femenino', label: 'Femenino' }
     ]
     const changeGen = (genero) => {
-
-        console.log(form)
         setForm({
             ...form,
             genero: genero.value
         })
     }
-    const handleChild = (medicamentos)=>{
+    const handleChild = (medicamentos) => {
         setForm({
             ...form,
             medicamentos: medicamentos
         })
-        console.log(medicamentos)
     }
     return (
         <>
-            <Modal isOpen={true}>
+            <Modal isOpen={true} size="lg" style={{ maxWidth: '1280px', width: '95%', position: 'absolute', top: '50%', right: '50%', transform: 'translate(50%,-50%)' }}>
                 <ModalHeader>
                     <div><h3>{props.encabezado}</h3></div>
                 </ModalHeader>
 
                 <ModalBody>
-                    {(props.encabezado === "Editar Registro") &&
-                        <FormGroup>
+                    <Row className='content-row'>
+                        <Col>
+                    <Row className='row'>
+                        <Col md={12} className='column'>
+                            {(props.encabezado === "Editar Registro") &&
+                            <div>
+                                    <label>Id:</label>
+                                    <input
+                                        className="form-control"
+                                        readOnly
+                                        type="text"
+                                        value={form.num_consulta}
+                                    />
+                            </div>
+                            }
+
+                            <label>Nombre:</label>
+                            <input
+                                required 
+                                className="form-control"
+                                name="nombre"
+                                type="text"
+                                onChange={handleChange}
+                                value={form.nombre}
+                            />
 
                             <label>
-                                Id:
+                                Codigo de estudiante:
                             </label>
-
                             <input
                                 className="form-control"
-                                readOnly
+                                name="cod_paciente"
                                 type="text"
-                                value={form.num_consulta}
+                                onChange={handleChange}
+                                value={form.cod_paciente}
                             />
-                        </FormGroup>
-                    }
-                    <FormGroup>
-                        <label>
-                            Nombre:
-                        </label>
-                        <input
-                            className="form-control"
-                            name="nombre"
-                            type="text"
-                            onChange={handleChange}
-                            value={form.nombre}
-                        />
-                    </FormGroup>
 
-                    <FormGroup>
-                        <label>
-                            Codigo de estudiante:
-                        </label>
-                        <input
-                            className="form-control"
-                            name="cod_paciente"
-                            type="text"
-                            onChange={handleChange}
-                            value={form.cod_paciente}
-                        />
-                    </FormGroup>
+                            <label>
+                                Genero:
+                            </label>
+                            <Select
+                                options={options}
+                                value={options.map(item => {
+                                    if (item.value === form.genero) {
+                                        return { value: form.genero, label: item.label }
+                                    }
+                                })}
+                                onChange={changeGen}
+                                className="select"
+                                name="genero"
+                            />
 
-                    <FormGroup>
-                        <label>
-                            genero:
-                        </label>
-                        <Select
-                            options={options}
-                            value={options.map(item => {
-                                if (item.value === form.genero) {
-                                    return { value: form.genero, label: item.label }
-                                }
-                            })}
-                            onChange={changeGen}
-                            className="form-control"
-                            name="genero"
-                        />
-                    </FormGroup>
+                            <label>
+                                Telefono:
+                            </label>
+                            <input
+                                className="form-control"
+                                name="telefono"
+                                type="text"
+                                onChange={handleChange}
+                                value={form.telefono}
+                            />
+                        </Col>
+                    </Row>
 
-                    <FormGroup>
-                        <label>
-                            telefono:
-                        </label>
-                        <input
-                            className="form-control"
-                            name="telefono"
-                            type="text"
-                            onChange={handleChange}
-                            value={form.telefono}
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <label>
-                            Motivo de Consulta:
-                        </label>
-                        <input
-                            className="form-control"
-                            name="motivo"
-                            type="text"
-                            onChange={handleChange}
-                            value={form.motivo}
-                        />
-                    </FormGroup>
+                    <Row className='row row-md'>
+                        <Col md={12} className='col'>
+                            <label>
+                                Motivo de Consulta:
+                            </label>
+                            <input
+                                className="form-control"
+                                name="motivo"
+                                type="text"
+                                onChange={handleChange}
+                                value={form.motivo}
+                            />
 
-                    <FormGroup>
-                        <label>
-                            Fecha de consulta:
-                        </label>
-                        <input
-                            className="form-control"
-                            name="fecha_consulta"
-                            type="text"
-                            onChange={handleChange}
-                            value={form.fecha_consulta}
-                        />
-                    </FormGroup>
+                            <label>
+                                Fecha de consulta:
+                            </label>
+                            <input
+                                className="form-control"
+                                name="fecha_consulta"
+                                type="text"
+                                onChange={handleChange}
+                                value={form.fecha_consulta}
+                            />
 
-                    <FormGroup>
-                        <label>
-                            Nombre Encargado:
-                        </label>
-                        <input
-                            className="form-control"
-                            name="encargado"
-                            type="text"
-                            onChange={handleChange}
-                            value={form.encargado}
-                        />
-                    </FormGroup>
+                            <label>
+                                Nombre Encargado:
+                            </label>
+                            <input
+                                className="form-control"
+                                name="encargado"
+                                type="text"
+                                onChange={handleChange}
+                                value={form.encargado}
+                            />
+                        </Col>
+                    </Row>
+
+                    <Row className='row row-table'>
+                        <Col md={16} className='col'>
+                            <FormMedicamentos
+                                optionsMed={props.optionsMed}
+                                form={form}
+                                handleChild={handleChild}
+                            />
+                        </Col>
+                    </Row>
+                    </Col>
+                    </Row>
+
+
                 </ModalBody>
-                <FormMedicamentos
-                optionsMed = {props.optionsMed}
-                form = {form}
-                handleChild = {handleChild}
-                />
+
                 <ModalFooter>
                     <Button
-                        color="primary"
-                        onClick={() => props.guardar(form)}
-                    >
-                        Guardar
-                    </Button>
+                        color="secondary"
+                        onClick={() => props.guardar(form)}>Guardar</Button>
                     <Button
                         color="danger"
-                        onClick={() => props.cerrarModal()}
-                    >
-                        Cancelar
-                    </Button>
+                        onClick={() => props.cerrarModal()}>Cancelar</Button>
                 </ModalFooter>
             </Modal>
 

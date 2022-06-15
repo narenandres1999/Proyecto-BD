@@ -5,35 +5,38 @@ import {
     Modal,
     ModalHeader,
     ModalBody,
-    ModalFooter,
+    ModalFooter
 } from "reactstrap";
+
+// Import Table :: Components
 import TablaConsulta from "../components/TablaConsulta";
 import FormEditar from "../components/Formulario/FormEditar";
 const ax = require("../api");
 class App extends Component {
+
     state = {
-        data: [],
-        optionsMeds: [{
-            value: "",
-            label: ""
-        }],
-        currentpage: 0,
-        limitItems: 10,
-        totalItems: 0,
-        modalActualizar: false,
-        modalInsertar: false,
-        form: {
-            num_consulta: "",
-            nombre: "",
-            cod_paciente: "",
-            genero: null,
-            telefono: "",
-            motivo: "",
-            fecha_consulta: "",
-            encargado: "",
-            medicamentos: []
-        },
-    };
+            data: [],
+            optionsMeds: [{
+                value: "",
+                label: ""
+            }],
+            totalItems: 0,
+            consultaActual:0,
+            modalActualizar: false,
+            modalInsertar: false,
+            form: {
+                num_consulta: "",
+                nombre: "",
+                cod_paciente: "",
+                genero: null,
+                telefono: "",
+                motivo: "",
+                fecha_consulta: "",
+                encargado: "",
+                medicamentos: []
+            },
+        };
+
     componentDidMount() {
         this.obtenerDatos();
         this.optionMed();
@@ -109,7 +112,6 @@ class App extends Component {
         })
     }
     mostrarModalInsertar = () => {
-        console.log(this.state.optionsMeds)
         this.cleanForm();
         this.setState({
             modalInsertar: true,
@@ -120,7 +122,6 @@ class App extends Component {
         this.setState({ modalInsertar: false });
     };
     editar = (form) => {
-        console.log(this.state.form)
         const body = {
             "encargado": form.encargado,
             "motivo": form.motivo,
@@ -166,8 +167,26 @@ class App extends Component {
             "nombre": form.nombre,
             "telefono": form.telefono
         }
-        ax.postCons(body).then(() => {
+        ax.postCons(body).then((res) => {
+            this.setState({
+                ...this.state,
+                consultaActual: res.data.num_consulta.max
+            })
             this.actualizarTabla();
+            if (form.medicamentos.length > 0){
+            ax.delMedCons(this.state.consultaActual).then(() => {
+                if (form.medicamentos.length > 0) {
+                    form.medicamentos.map(item => {
+    
+                        const med = {
+                            id_med: item.id_med,
+                            cantidad: item.cantidad
+                        }
+                        ax.postMedCons(this.state.consultaActual,med)
+                    })
+                }
+            })
+        }
         })
         this.setState({ modalInsertar: false });
     }
@@ -185,9 +204,11 @@ class App extends Component {
         })
     }
     render() {
-
+        
         return (
             <>
+
+
                 <TablaConsulta
                     list={this.state.data}
                     mostrarAgregar={this.mostrarModalInsertar}
@@ -198,21 +219,15 @@ class App extends Component {
                     <ModalHeader>
                         <div><h3>Eliminar registro</h3></div>
                         <ModalBody>
-                            <p color="blue">¿Esta seguro que desea eliminar este registro?</p>
+                            <p className='text'>¿Esta seguro que desea eliminar este registro?</p>
                         </ModalBody>
                         <ModalFooter>
                             <Button
-                                color="primary"
-                                onClick={() => this.eliminar()}
-                            >
-                                Eliminar
-                            </Button>
+                                color="secondary"
+                                onClick={() => this.eliminar()}>Eliminar</Button>
                             <Button
                                 color="danger"
-                                onClick={() => this.cerrarModalEliminar()}
-                            >
-                                Cancelar
-                            </Button>
+                                onClick={() => this.cerrarModalEliminar()}>Cancelar</Button>
                         </ModalFooter>
                     </ModalHeader>
                 </Modal>

@@ -1,0 +1,206 @@
+.acciones {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row wrap;
+}
+
+.acciones-title {
+    text-align: center !important;
+}
+
+.acciones button {
+    margin-right: 5px;
+    padding: 5px 10px;
+}
+
+tr {
+    font-size: 14px;
+    text-align: left;
+}
+
+th {
+    text-transform: initial;
+}
+
+.table-thead {
+    border-radius: 10px !important;
+}
+
+.main-components {
+    margin: 20px 50px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-components button {
+    font-weight: bold;
+    padding: 8px 30px;
+    margin-left: 50px;
+}
+
+.main-components .title-components h1 {
+    font-size: 24px; 
+    font-weight: bold;
+    color: #384359;
+}
+
+@media screen and (max-width: 1080px) {
+
+    .main-components .title-components h1 {
+        font-size: 18px;
+    }
+    
+}
+
+.search-div { width: 30% !important;}
+
+.search-div .rounded {
+    border-radius: 50px !important;
+    padding: 5px 20px;
+}
+
+.search-div input:focus {
+    outline: none !important;
+    border-color: rgba(0,0,0,.3);
+    box-shadow:  none;;
+}
+
+label {
+    font-size: 16px !important;
+    font-weight: bold;
+    color: rgba(0,0,0,.5);
+    margin: 10px 0px;
+}
+
+ModalBody > input {
+    border-radius: none !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(0,0,0,1) !important;
+
+}
+input:focus {
+    outline: none !important;
+    border-color: rgba(0,0,0,.3) !important;
+    box-shadow: none !important;
+}
+
+div > h3 {
+    color: #384359;
+    font-size: 24px !important;
+    font-weight: bold;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.pagination .pagination-link { 
+    color: #384359 !important;
+}
+
+.paginationLinkStyle {
+    color: #384359; 
+
+}
+
+.paginationLinkStyle:focus {
+    background: #EF4665 !important;
+}
+
+.paginationLinkStyle:hover {
+    background: rgba(0,0,0,.1);
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff !important;
+    background-color: #EF4665;
+    border-color: #EF4665;
+}
+
+.page-link {
+    box-shadow: none !important;
+    transition: all .3s ease;    
+}
+
+.page-link:hover {
+    color: #384359 !important;
+}
+
+.page-link {
+    color: #384359 !important;
+}
+
+.btn-danger {
+    box-shadow: none !important;
+    color: #fff;
+    background-color: #EF4665 !important;
+    border-color: #EF4665 !important;
+}
+
+.btn-secondary {
+    color: #fff;
+    box-shadow: none !important;
+    background-color: #384359 !important;
+    border-color: #384359 !important;
+}
+
+.disabled .page-link {
+    color: rgba(0,0,0,.4) !important;
+    background:  rgba(0,0,0,.05) !important;
+}
+
+
+.text {
+    color: #384359;
+}
+
+.row {
+    float: left !important;
+}
+
+.row-md {
+    margin: 0px 10px !important;
+}
+
+.medicamento {
+    width: 100%;
+    display: inline-flex;
+    flex-flow: row wrap;
+    float:left;
+}
+
+.select {
+    width: 100%;
+}
+
+.medicamento label {
+    width: 100%;
+}
+
+.medicamento input {
+    width: 50px;
+    margin: 0px 10px;
+    text-align:center;
+    float:left !important;
+}
+
+.medicamento .medicamento-select {
+    display:flex;
+    flex-direction:row;
+    width: 100%;
+}
+
+.medicamento button {
+    float:left !important;
+}
+
+.row-table {width: 50%;}
+
+.content-row {
+    display:flex;
+}
