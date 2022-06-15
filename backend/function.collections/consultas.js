@@ -4,7 +4,6 @@ const db = require("../database/db");
  
 const getCons = (req,res)=>{
     let total = 0;
-    console.log({req,res})
     db.query
     ('SELECT * FROM consulta_total where borrar = false ORDER BY num_consulta ASC',
         (err,items)=>{
@@ -29,11 +28,11 @@ const postCons = (req,res)=>{
     const {encargado,motivo,fecha_consulta,cod_paciente,genero,nombre,telefono} = req.body;
     // addconsulta (encargado,motivo,fecha_consulta,cod_paciente,genid,nombre,telefono)
     db.query('CALL addconsulta($1,$2,$3,$4,$5,$6,$7);',
-    [encargado,motivo,fecha_consulta,cod_paciente,genero,nombre,telefono],(err)=>{
+    [encargado,motivo,fecha_consulta,cod_paciente,genero,nombre,telefono],(err,result)=>{
     if (err){
         res.json(err);
     }
-    res.json({"message":"se añadio con exito","result": req.body});
+    res.json({"message":"se añadio con exito","result": result});
     })
 };
 

@@ -30,6 +30,18 @@ const postMedCons = (num_consulta,data)=>{
 const delMedCons = (num_consulta)=>{
     return axios.delete(`${url}/cons/${num_consulta}/meds`,config);
 }
+const getMeds = ()=>{
+    return axios.get(`${url}/meds`,config);
+}
+const postMeds = (data)=>{
+    return axios.post(`${url}/meds`,data,config);
+}
+const putMed = (id_med,data)=>{
+    return axios.put(`${url}/meds/${id_med}`,data,config);
+}
+const delMed = (id_med)=>{
+    return axios.delete(`${url}/meds/${id_med}`,config);
+}
 module.exports = {
     getCons,
     postCons,
@@ -37,5 +49,9 @@ module.exports = {
     delCons,
     getMedCons,
     postMedCons,
-    delMedCons
+    delMedCons,
+    getMeds,
+    postMeds,
+    putMed,
+    delMed,
 }
