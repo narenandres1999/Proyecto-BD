@@ -43,7 +43,7 @@ const FormEditar = (props) => {
     }
     return (
         <>
-            <Modal isOpen={true} size="lg" style={{ maxWidth: '1280px', width: '95%', position: 'absolute', top: '50%', right: '50%', transform: 'translate(50%,-50%)' }}>
+            <Modal isOpen={true} size="lg" style={{ maxWidth: '1280px', width: '95%', position: 'absolute', top: '45%', right: '50%', transform: 'translate(50%,-50%)' }}>
                 <ModalHeader>
                     <div><h3>{props.encabezado}</h3></div>
                 </ModalHeader>

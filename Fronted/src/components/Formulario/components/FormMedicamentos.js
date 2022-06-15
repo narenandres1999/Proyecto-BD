@@ -64,7 +64,7 @@ const FormMedicamentos = (props) => {
                         placeholder='Seleccionar'
                     />
                     <input
-                        placeholder="Cantidad"
+                        placeholder="0"
                         className="form-control"
                         name="cantidad"
                         type="text"

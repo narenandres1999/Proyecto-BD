@@ -13,13 +13,13 @@ import TablaConsulta from "../components/TablaConsulta";
 import FormEditar from "../components/Formulario/FormEditar";
 const ax = require("../api");
 class App extends Component {
-
     state = {
             data: [],
             optionsMeds: [{
                 value: "",
                 label: ""
             }],
+            currentPage: 0,
             totalItems: 0,
             consultaActual:0,
             modalActualizar: false,
@@ -208,14 +208,13 @@ class App extends Component {
         return (
             <>
 
-
                 <TablaConsulta
                     list={this.state.data}
                     mostrarAgregar={this.mostrarModalInsertar}
                     mostrarEditar={this.mostrarModalActualizar}
                     mostrarEliminar={this.mostrarModalEliminar}
                 />
-                <Modal isOpen={this.state.modalEliminar}>
+                <Modal isOpen={this.state.modalEliminar} style={{position: 'absolute', top: '45%', right: '50%', transform: 'translate(50%,-50%)'}}>
                     <ModalHeader>
                         <div><h3>Eliminar registro</h3></div>
                         <ModalBody>
