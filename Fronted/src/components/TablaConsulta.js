@@ -3,7 +3,7 @@ import {
     Button,
     Container,
 } from "reactstrap";
-import '../../Table.css'
+import '../pages/Table.css'
 import { MdEdit, MdDelete } from "react-icons/md";
 const TablaConsulta = (props) => {
     return (

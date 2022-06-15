@@ -9,13 +9,11 @@ import {
     ModalFooter
 } from "reactstrap";
 
-import { MdEdit, MdDelete } from "react-icons/md";
 import Select from 'react-select'
 import { useState } from "react";
-
+import FormMedicamentos from "./components/FormMedicamentos";
 const FormEditar = (props) => {
     const [form, setForm] = useState(props.item)
-    const [selected, setSelected] = useState({})
     const handleChange = (e) => {
         let target = e.target
         console.log(form)
@@ -37,35 +35,13 @@ const FormEditar = (props) => {
             genero: genero.value
         })
     }
-    const changeMedicamentos = (med) => {
-
-        console.log(form)
-        setSelected(med.value)
-    }
-    const addMed = () => {
-        let newMedicamentos = form.medicamentos;
-        let nuevoMedicamento = {};
-        nuevoMedicamento = selected;
-        nuevoMedicamento.cantidad = form.cantidad;
-        newMedicamentos.push(nuevoMedicamento)
+    const handleChild = (medicamentos)=>{
         setForm({
             ...form,
-            medicamentos: newMedicamentos
+            medicamentos: medicamentos
         })
+        console.log(medicamentos)
     }
-    const eliminarMed = (med) => {
-        let newMedicamentos = []
-        form.medicamentos.map(item => {
-            if (!(item.id_med === med.id_med && item.cantidad === med.cantidad)) {
-                newMedicamentos.push(item)
-            }
-        })
-        setForm({
-            ...form,
-            medicamentos: newMedicamentos
-        })
-    }
-
     return (
         <>
             <Modal isOpen={true}>
@@ -183,55 +159,11 @@ const FormEditar = (props) => {
                         />
                     </FormGroup>
                 </ModalBody>
-                <Container>
-                    <Select
-                        options={props.optionsMed}
-                        value={props.optionsMed.map(item => {
-                            if (item.value.id_med === selected.id_med) {
-                                return item
-                            }
-                        })}
-                        onChange={changeMedicamentos}
-                        className="form-control"
-                        name="medicamentos"
-                    />
-                    <FormGroup>
-                        <input
-                            placeholder="Cantidad"
-                            className="form-control"
-                            name="cantidad"
-                            type="text"
-                            onChange={handleChange}
-                            value={form.cantidad}
-                        />
-                    </FormGroup>
-                    <Button color="secondary" onClick={() => { addMed() }}>Añadir</Button>
-                    <Table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Codigo medicamento</th>
-                                <th>Nombre medicamento</th>
-                                <th>Cantidad</th>
-                                <th>Fecha_Vencimiento</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {form.medicamentos.map((med) => (
-                                <tr key = {med.id_med}>
-                                    <td>{med.id_med}</td>
-                                    <td>{med.cod_med}</td>
-                                    <td>{med.med_nombre}</td>
-                                    <td>{med.cantidad}</td>
-                                    <td>{med.fecha_ven}</td>
-                                    <td><Button color="danger" onClick={() => { eliminarMed(med) }}><MdDelete /></Button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-
-                </Container>
+                <FormMedicamentos
+                optionsMed = {props.optionsMed}
+                form = {form}
+                handleChild = {handleChild}
+                />
                 <ModalFooter>
                     <Button
                         color="primary"

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../Table.css'
+import './Table.css'
 import {
     Button,
     Modal,
@@ -7,9 +7,9 @@ import {
     ModalBody,
     ModalFooter,
 } from "reactstrap";
-import TablaConsulta from "./components/TablaConsulta";
-import FormEditar from "./components/FormEditar";
-const ax = require("../../api");
+import TablaConsulta from "../components/TablaConsulta";
+import FormEditar from "../components/Formulario/FormEditar";
+const ax = require("../api");
 class App extends Component {
     state = {
         data: [],

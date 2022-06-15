@@ -6,8 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 // Import routes : Pages
 import Inicio from './pages/Inicio'
-import Datos from './pages/Datos'
-import Consultas from './pages/Consultas/Consultas'
+import Consultas from './pages/Consultas'
 import Medicamentos from './pages/Medicamentos'
 import Error from './pages/Error'
 
@@ -21,8 +20,7 @@ export default class App extends Component {
                 <Navbar />
                 <div className='container'>
                     <Routes>
-                        <Route path='/' exact element={<Inicio />} />
-                        <Route path='/datos' element={<Datos />} />                        
+                        <Route path='/' exact element={<Inicio />} />                     
                         <Route path='/consultas' element={<Consultas />} />
                         <Route path='/medicamentos' element={<Medicamentos />} />
                         <Route path='*' element={<Error />} />
