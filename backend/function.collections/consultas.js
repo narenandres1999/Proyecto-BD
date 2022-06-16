@@ -9,12 +9,12 @@ const getCons = (req,res)=>{
         (err,items)=>{
         if (err){
             console.log ("ha ocurrido un error");
-            res.json({"message":"ha ocurrio un error","error":err});
+            res.json({"message":"ha ocurrio un error",err});
         }
         db.query('select count (num_consulta) as total from consulta_total where borrar = false;',(err,result)=>{
             if (err){
                 console.log ("ha ocurrido un error");
-                res.json({"message":"ha ocurrio un error","error":err});
+                res.json({"message":"ha ocurrio un error",err});
             }
             total = parseInt(result.rows[0].total);
             res.json({"items":items.rows,"total":total})
@@ -28,7 +28,7 @@ const postCons = (req,res)=>{
     const {encargado,motivo,fecha_consulta,cod_paciente,genero,nombre,telefono} = req.body;
     // addconsulta (encargado,motivo,fecha_consulta,cod_paciente,genid,nombre,telefono)
     db.query('CALL addconsulta($1,$2,$3,$4,$5,$6,$7);',
-    [encargado,motivo,fecha_consulta,cod_paciente,genero,nombre,telefono],(err,result)=>{
+    [encargado,motivo,fecha_consulta,cod_paciente,genero,nombre,telefono],(err,response)=>{
     if (err){
         res.json(err);
     }
@@ -36,7 +36,7 @@ const postCons = (req,res)=>{
         if (err){
             res.json(err);
         }
-        res.json({"num_consulta": result.rows[0]})
+        res.json({"num_consulta": result.rows[0],"message":"Se ha añadido con exito",response})
     })
     })
 };
@@ -59,16 +59,16 @@ const putOneCons = (req,res)=>{
     db.query("call update_consulta ($1,$2,$3,$4,$5,$6,$7,$8);",
     [id,encargado,motivo,fecha_consulta,cod_paciente,genero,nombre,telefono],(err,result)=>{
         if (err){
-            res.json({"message":"ha ocurrido algo","message":err});
+            res.json(err);
         } 
-        res.json({"message":"se ha actualizado con exito","result": req.body});
+        res.json({"message":"se ha actualizado con exito",result});
     })
 }
 const deleteOneCons = (req,res)=>{
     const id = req.params.num_consulta;
     db.query("update consultas set borrar = true where num_consulta = $1",[id],(err,result)=>{
-        if (err) res.json({"message":err});
-        res.json({"message":"se ha eliminado con exito","result":result});
+        if (err) res.json(err);
+        res.json({"message":"se ha eliminado con exito",result});
     })
 }
 // Endpoints para la ruta /:num_consulta/meds
@@ -90,16 +90,16 @@ const postMedCons = (req,res)=>{
     db.query("INSERT INTO cons_med (id_med,num_consulta,cantidad) VALUES ($1,$2,$3)",
     [id_med,id,cantidad],(err,result)=>{
         if (err){
-            res.json({err})
+            res.json(err)
         }
-        res.json({"message":"se añadio con exito","result":result});
+        res.json({"message":"se añadio con exito",result});
     })
 }
 const deleteMedCons = (req,res)=>{
     const id = req.params.num_consulta;
     db.query("delete from cons_med where num_consulta = $1;",[id],(err,result)=>{
         if (err) res.json(err)
-        res.json({"message":"se ha borrado con exito"});
+        res.json({"message":"se ha borrado con exito",result});
     })
 }
 // exporto los modelos

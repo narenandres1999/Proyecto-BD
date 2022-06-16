@@ -152,30 +152,74 @@ class App extends Component {
             "nombre": form.nombre,
             "telefono": form.telefono
         }
-        ax.putCons(form.num_consulta, body).then(() => {
-            this.setState({ modalActualizar: false });
-            this.actualizarTabla()
-        })
-        ax.delMedCons(form.num_consulta).then(() => {
-            if (form.medicamentos.length > 0) {
-                form.medicamentos.map(item => {
-
-                    const med = {
-                        id_med: item.id_med,
-                        cantidad: item.cantidad
-                    }
-                    ax.postMedCons(form.num_consulta, med)
+        ax.putCons(form.num_consulta, body).then((res) => {
+            if (!(res.data.errors === undefined)) {
+                this.setState({
+                    message: res.data.errors[0].msg,
+                    status: res.status
                 })
+                this.mostrarMensaje()
+            }
+            else {
+                ax.delMedCons(form.num_consulta).then((res) => {
+                    if (!(res.data.errors === undefined)) {
+                        this.setState({
+                            message: res.data.errors[0].msg,
+                            status: res.status
+                        })
+                    }
+                    else {
+                        if (form.medicamentos.length > 0) {
+                            form.medicamentos.map(item => {
+
+                                const med = {
+                                    id_med: item.id_med,
+                                    cantidad: item.cantidad
+                                }
+                                ax.postMedCons(form.num_consulta, med).then(res => {
+                                    if (!(res.data.errors === undefined)) {
+                                        this.setState({
+                                            message: res.data.errors[0].msg,
+                                            status: res.status
+                                        })
+                                    }
+                                })
+                            })
+                        }
+                    }
+                })
+                this.setState({
+                    modalActualizar: false,
+                    message: res.data.message,
+                    status: res.status
+                });
+                this.actualizarTabla()
+                this.mostrarMensaje()
             }
         })
+
     };
 
     eliminar = () => {
-        ax.delCons(this.state.form.num_consulta).then(() => {
-            this.cleanForm();
-            this.actualizarTabla();
+        ax.delCons(this.state.form.num_consulta).then((res) => {
+            if (!(res.data.errors === undefined)) {
+                this.setState({
+                    message: res.data.errors[0].msg,
+                    status: 300
+                })
+                this.mostrarMensaje()
+            }
+            else {
+                this.setState({
+                    modalEliminar: false,
+                    message: res.data.message,
+                    status: res.status
+                });
+                this.mostrarMensaje();
+                this.cleanForm();
+                this.actualizarTabla();
+            }
         })
-        this.setState({ modalEliminar: false });
     };
 
     insertar = (form) => {
@@ -189,26 +233,40 @@ class App extends Component {
             "telefono": form.telefono
         }
         ax.postCons(body).then((res) => {
-            this.setState({
-                ...this.state,
-                consultaActual: res.data.num_consulta.max
-            })
-            if (form.medicamentos.length > 0) {
-                ax.delMedCons(this.state.consultaActual).then(() => {
-                    form.medicamentos.map(item => {
-
-                        const med = {
-                            id_med: item.id_med,
-                            cantidad: item.cantidad
-                        }
-                        ax.postMedCons(this.state.consultaActual, med)
-
-                    })
+            if (!(res.data.errors === undefined)) {
+                this.setState({
+                    message: res.data.errors[0].msg,
+                    status: 300
                 })
+                this.mostrarMensaje()
             }
-            this.actualizarTabla();
+            else {
+                this.setState({
+                    ...this.state,
+                    consultaActual: res.data.num_consulta.max
+                })
+                if (form.medicamentos.length > 0) {
+                    ax.delMedCons(this.state.consultaActual).then(() => {
+                        form.medicamentos.map(item => {
+
+                            const med = {
+                                id_med: item.id_med,
+                                cantidad: item.cantidad
+                            }
+                            ax.postMedCons(this.state.consultaActual, med)
+
+                        })
+                    })
+                }
+                this.setState({
+                    modalInsertar: false,
+                    message: res.data.message,
+                    status: res.status
+                });
+                this.mostrarMensaje();
+                this.actualizarTabla();
+            }
         })
-        this.setState({ modalInsertar: false });
     }
     handleChange = (e) => {
         this.setState({
