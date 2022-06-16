@@ -10,7 +10,7 @@ import {
 
 // Import Table :: Components
 import TablaConsulta from "../components/TablaConsulta";
-import FormEditar from "../components/Formulario/FormConsulta";
+import FormConsulta from "../components/Formulario/FormConsulta";
 const ax = require("../api");
 class App extends Component {
     state = {
@@ -230,7 +230,7 @@ class App extends Component {
                     </ModalHeader>
                 </Modal>
                 <Modal isOpen={this.state.modalActualizar}>
-                    <FormEditar
+                    <FormConsulta
                         optionsMed={this.state.optionsMeds}
                         encabezado={"Editar Registro"}
                         handleChild={this.handleChild}
@@ -240,7 +240,7 @@ class App extends Component {
                     />
                 </Modal>
                 <Modal isOpen={this.state.modalInsertar}>
-                    <FormEditar
+                    <FormConsulta
                         item={{
                             num_consulta: "",
                             nombre: "",

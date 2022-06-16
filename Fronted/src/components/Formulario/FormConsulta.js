@@ -14,7 +14,7 @@ import {
 import Select from 'react-select'
 import { useState } from "react";
 import FormMedicamentos from "./components/FormMedicamentos";
-const FormEditar = (props) => {
+const FormConsulta = (props) => {
     const [form, setForm] = useState(props.item)
     const options = [
         { value: 'Masculino', label: 'Masculino' },
@@ -180,4 +180,4 @@ const FormEditar = (props) => {
     );
 }
 
-export default FormEditar;
+export default FormConsulta;
