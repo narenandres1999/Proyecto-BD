@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import './Style.css'
 
 // Importando imagenes
+// Aqui hay un error de logo
 import logo from '../assets/logo.png';
 
 export default class Error extends Component {
