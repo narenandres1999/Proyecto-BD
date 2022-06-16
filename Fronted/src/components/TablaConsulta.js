@@ -6,7 +6,8 @@ import {
 import '../pages/Table.css'
 import { MdEdit, MdDelete } from "react-icons/md";
 import { useState } from "react";
-import PaginationData from "./Pagination"
+import PaginationData from "./Pagination";
+
 const TablaConsulta = (props) => {
   // hooks para el filtrado en la lista
   const [search, setSearch] = useState("");

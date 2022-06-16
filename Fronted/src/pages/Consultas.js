@@ -11,6 +11,7 @@ import {
 // Import Table :: Components
 import TablaConsulta from "../components/TablaConsulta";
 import FormConsulta from "../components/Formulario/FormConsulta";
+import Mensaje from "../components/Mensaje";
 const ax = require("../api");
 class App extends Component {
     state = {
@@ -21,6 +22,9 @@ class App extends Component {
         }],
         currentPage: 0,
         totalItems: 0,
+        modalMensaje: false,
+        message: "",
+        status: "",
         consultaActual: 0,
         modalActualizar: false,
         modalInsertar: false,
@@ -53,6 +57,23 @@ class App extends Component {
             this.setState({
                 optionsMeds: options
             })
+        })
+    }
+    mostrarMensaje = () => {
+        this.setState({
+            modalMensaje: true
+        })
+
+        setTimeout(() => {
+            this.setState({
+                modalMensaje: false
+            })
+        }, 2000)
+
+    }
+    cerrarMensaje = () => {
+        this.setState({
+            modalMensaje: false
         })
     }
     obtenerDatos = () => {
@@ -181,7 +202,7 @@ class App extends Component {
                             cantidad: item.cantidad
                         }
                         ax.postMedCons(this.state.consultaActual, med)
-                        
+
                     })
                 })
             }
@@ -206,7 +227,12 @@ class App extends Component {
 
         return (
             <>
-
+                <Mensaje
+                    mostrar={this.state.modalMensaje}
+                    status={this.state.status}
+                    message={this.state.message}
+                    cerrarModal={this.cerrarMensaje}
+                />
                 <TablaConsulta
                     list={this.state.data}
                     mostrarAgregar={this.mostrarModalInsertar}

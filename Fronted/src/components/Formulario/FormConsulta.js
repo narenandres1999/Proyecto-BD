@@ -1,19 +1,16 @@
 import {
     Col,
     Row,
-    Table,
     Button,
-    Container,
     Modal,
     ModalHeader,
     ModalBody,
-    FormGroup,
     ModalFooter
 } from "reactstrap";
 
 import Select from 'react-select'
 import { useState } from "react";
-import FormMedicamentos from "./components/FormMedicamentos";
+import FormMedicamentos from "./components/addMedicamentos";
 const FormConsulta = (props) => {
     const [form, setForm] = useState(props.item)
     const options = [

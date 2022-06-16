@@ -27,7 +27,7 @@ const validateCreate = [
     .isInt()
     .custom((value,{req})=>{
         if (value <= 0){
-            throw new Error("Debe ser mayor a 0")
+            throw new Error("La cantidad de medicamentos debe ser mayor a 0")
         }
         return true;
     }),

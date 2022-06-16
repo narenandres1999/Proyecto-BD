@@ -2,11 +2,10 @@ import {
     Table,
     Button,
     Container,
-    FormGroup,
 } from "reactstrap";
 import { useState } from "react";
 import Select from 'react-select';
-import { MdEdit, MdDelete } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 import '../../../pages/Table.css'
 
