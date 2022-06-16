@@ -7,7 +7,7 @@ import '../pages/Table.css'
 import { MdEdit, MdDelete } from "react-icons/md";
 import { useState } from "react";
 import PaginationData from "./Pagination";
-
+import Loading from "./Loading";
 const TablaConsulta = (props) => {
   // hooks para el filtrado en la lista
   const [search, setSearch] = useState("");
@@ -31,7 +31,6 @@ const TablaConsulta = (props) => {
         <div className='title-components'>
 
           <h1>Consultas medicas</h1></div>
-
         <div class="search-div input-group rounded">
           <input
             type="search"
@@ -56,6 +55,9 @@ const TablaConsulta = (props) => {
           handleClick={handleClick}
           pagesCount={pagesCount}
         />
+        
+        <Loading hidden = {props.hidden}/>
+        { props.hidden &&
         <Table className='table table-borderless table-hover' style={{ width: '100%' }}>
           <thead className='table-light table-thead'>
             <tr>
@@ -105,7 +107,7 @@ const TablaConsulta = (props) => {
               ))}
           </tbody>
         </Table>
-
+        }
       </Container>
     </>
   );

@@ -1,10 +1,25 @@
 .modal-content-msg {
     z-index: 9999;
     padding: 15px !important;
+    position:absolute;
+    top: 35%;
+    left: 0;
+    right: 0;
+    transform:translate(-50%,-50%);
+    width: 350px !important;
+    transition: all .3s ease;
 }
 
 .modal-content-msg svg {
+    filter: brightness(1) invert(1);
+    position:absolute;
+    top: -50px;
+    bottom: 0;
+    left: 38%; 
+    right: 0%;
     font-size: 5rem;
+    margin: 15px 0px;
+    border: 10px solid #000;
 }
 
 .modal-content-msg .modal-content {
@@ -12,14 +27,31 @@
     text-align: center;
 }
 
-.mensaje-success {
-
+.modal-text {
+    display:flex;
+    flex-direction: column;
+    margin-top: 60px;
 }
-.mensaje-error{
 
+.modal-content-msg .modal-content .title {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #384359;
 }
 
+.modal-content-msg .modal-content label {
+    font-weight: 400;
+    line-height: 1;
+}
+
+.mensaje-error svg{ 
+    background-color: #10b99a !important;
+    padding: 10px;
+    border-radius: 50%;
+}
 
 .mensaje-success svg {
-
+    background-color: #d1338e !important;
+    padding: 10px;
+    border-radius: 50%;
 }

@@ -14,6 +14,10 @@
     padding: 5px 10px;
 }
 
+thead > tr {
+    font-size: 14px;
+}
+
 tr {
     font-size: 14px;
     text-align: left;
@@ -28,8 +32,10 @@ th {
 }
 
 .main-components {
-    margin: 20px 50px;
+    width: 100%;
+    margin: 20px 10px;
     display:flex;
+    flex-flow: row wrap;
     align-items: center;
     justify-content: space-between;
 }
@@ -37,21 +43,13 @@ th {
 .main-components button {
     font-weight: bold;
     padding: 8px 30px;
-    margin-left: 50px;
+    margin-left: 0px;
 }
 
 .main-components .title-components h1 {
     font-size: 24px; 
     font-weight: bold;
     color: #384359;
-}
-
-@media screen and (max-width: 1080px) {
-
-    .main-components .title-components h1 {
-        font-size: 18px;
-    }
-    
 }
 
 .search-div { width: 30% !important;}
@@ -65,6 +63,12 @@ th {
     outline: none !important;
     border-color: rgba(0,0,0,.3);
     box-shadow:  none;;
+}
+
+@media screen and (max-width: 1080px) {
+    .search-div {width: 50% !important;}
+    .main-components .title-components h1 {font-size: 18px;}
+    .main-components button {margin: 20px 0px 20px auto;}
 }
 
 label {
@@ -118,8 +122,8 @@ div > h3 {
 .page-item.active .page-link {
     z-index: 3;
     color: #fff !important;
-    background-color: #EF4665;
-    border-color: #EF4665;
+    background-color: #EF4665 !important;
+    border-color: #EF4665 !important;
 }
 
 .page-link {

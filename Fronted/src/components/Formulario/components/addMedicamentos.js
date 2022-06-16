@@ -6,7 +6,7 @@ import {
 import { useState } from "react";
 import Select from 'react-select';
 import { MdDelete } from "react-icons/md";
-
+import Mensaje from "../../Mensaje";
 import '../../../pages/Table.css'
 
 const AddMedicamentos = (props) => {
@@ -22,14 +22,14 @@ const AddMedicamentos = (props) => {
     }
     const addMed = () => {
         const int = parseInt(cantidad);
-        if (int > 0){
-        let newMedicamentos = medicamentos;
-        let nuevoMedicamento = {};
-        nuevoMedicamento = selected;
-        nuevoMedicamento.cantidad = cantidad;
-        newMedicamentos.push(nuevoMedicamento);
-        setMedicamentos(newMedicamentos);
-        props.handleChild(medicamentos);
+        if (int > 0) {
+            let newMedicamentos = medicamentos;
+            let nuevoMedicamento = {};
+            nuevoMedicamento = selected;
+            nuevoMedicamento.cantidad = cantidad;
+            newMedicamentos.push(nuevoMedicamento);
+            setMedicamentos(newMedicamentos);
+            props.obtenerMedicamentos(medicamentos);
         }
     }
     const eliminarMed = (med) => {
@@ -40,37 +40,38 @@ const AddMedicamentos = (props) => {
             }
         })
         setMedicamentos(newMedicamentos);
-        props.handleChild(newMedicamentos);
+        props.obtenerMedicamentos(newMedicamentos);
     }
+    // Mostrar mensajes de error
     return (
         <>
             <Container fluid>
-            
+
                 <div className='medicamento'>
-                <label>Medicamento:</label>
+                    <label>Medicamento:</label>
                     <br />
                     <div className='medicamento-select'>
-                    <Select
-                        options={props.optionsMed}
-                        value={props.optionsMed.map(item => {
-                            if (item.value.id_med === selected.id_med) {
-                                return item
-                            }
-                        })}
-                        onChange={changeMedicamentos}
-                        className="select"
-                        name="medicamentos"
-                        placeholder='Seleccionar'
-                    />
-                    <input
-                        placeholder="0"
-                        className="form-control"
-                        name="cantidad"
-                        type="text"
-                        onChange={handleChange}
-                        value={cantidad}
-                    />
-                <Button color="secondary" onClick={() => { addMed() }}>Añadir</Button>
+                        <Select
+                            options={props.optionsMed}
+                            value={props.optionsMed.map(item => {
+                                if (item.value.id_med === selected.id_med) {
+                                    return item
+                                }
+                            })}
+                            onChange={changeMedicamentos}
+                            className="select"
+                            name="medicamentos"
+                            placeholder='Seleccionar'
+                        />
+                        <input
+                            placeholder="0"
+                            className="form-control"
+                            name="cantidad"
+                            type="text"
+                            onChange={handleChange}
+                            value={cantidad}
+                        />
+                        <Button color="secondary" onClick={() => { addMed() }}>Añadir</Button>
 
                     </div>
 

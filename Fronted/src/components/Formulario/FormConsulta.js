@@ -11,8 +11,10 @@ import {
 import Select from 'react-select'
 import { useState } from "react";
 import AddMedicamentos from "./components/AddMedicamentos";
+import Mensaje from "../Mensaje";
 const FormConsulta = (props) => {
     const [form, setForm] = useState(props.item)
+
     const options = [
         { value: 'Masculino', label: 'Masculino' },
         { value: 'Femenino', label: 'Femenino' }
@@ -23,7 +25,7 @@ const FormConsulta = (props) => {
             ...form,
             [target.name]: target.value
         })
-        props.handleChild(form)
+        props.obtenerFormulario(form)
     }
 
     const changeGen = (genero) => {
@@ -32,7 +34,7 @@ const FormConsulta = (props) => {
             genero: genero.value
         })
     }
-    const handleChild = (medicamentos) => {
+    const obtenerMedicamentos = (medicamentos) => {
         setForm({
             ...form,
             medicamentos: medicamentos
@@ -48,116 +50,116 @@ const FormConsulta = (props) => {
                 <ModalBody>
                     <Row className='content-row'>
                         <Col>
-                    <Row className='row'>
-                        <Col md={12} className='column'>
-                            {(props.encabezado === "Editar Registro") &&
-                            <div>
-                                    <label>Id:</label>
+                            <Row className='row'>
+                                <Col md={12} className='column'>
+                                    {(props.encabezado === "Editar Registro") &&
+                                        <div>
+                                            <label>Id:</label>
+                                            <input
+                                                className="form-control"
+                                                readOnly
+                                                type="text"
+                                                value={form.num_consulta}
+                                            />
+                                        </div>
+                                    }
+
+                                    <label>Nombre:</label>
+                                    <input
+                                        required
+                                        className="form-control"
+                                        name="nombre"
+                                        type="text"
+                                        onChange={handleChange}
+                                        value={form.nombre}
+                                    />
+
+                                    <label>
+                                        Codigo de estudiante:
+                                    </label>
                                     <input
                                         className="form-control"
-                                        readOnly
+                                        name="cod_paciente"
                                         type="text"
-                                        value={form.num_consulta}
+                                        onChange={handleChange}
+                                        value={form.cod_paciente}
                                     />
-                            </div>
-                            }
 
-                            <label>Nombre:</label>
-                            <input
-                                required 
-                                className="form-control"
-                                name="nombre"
-                                type="text"
-                                onChange={handleChange}
-                                value={form.nombre}
-                            />
+                                    <label>
+                                        Genero:
+                                    </label>
+                                    <Select
+                                        options={options}
+                                        value={options.map(item => {
+                                            if (item.value === form.genero) {
+                                                return { value: form.genero, label: item.label }
+                                            }
+                                        })}
+                                        onChange={changeGen}
+                                        className="select"
+                                        name="genero"
+                                    />
 
-                            <label>
-                                Codigo de estudiante:
-                            </label>
-                            <input
-                                className="form-control"
-                                name="cod_paciente"
-                                type="text"
-                                onChange={handleChange}
-                                value={form.cod_paciente}
-                            />
+                                    <label>
+                                        Telefono:
+                                    </label>
+                                    <input
+                                        className="form-control"
+                                        name="telefono"
+                                        type="text"
+                                        onChange={handleChange}
+                                        value={form.telefono}
+                                    />
+                                </Col>
+                            </Row>
 
-                            <label>
-                                Genero:
-                            </label>
-                            <Select
-                                options={options}
-                                value={options.map(item => {
-                                    if (item.value === form.genero) {
-                                        return { value: form.genero, label: item.label }
-                                    }
-                                })}
-                                onChange={changeGen}
-                                className="select"
-                                name="genero"
-                            />
+                            <Row className='row row-md'>
+                                <Col md={12} className='col'>
+                                    <label>
+                                        Motivo de Consulta:
+                                    </label>
+                                    <input
+                                        className="form-control"
+                                        name="motivo"
+                                        type="text"
+                                        onChange={handleChange}
+                                        value={form.motivo}
+                                    />
 
-                            <label>
-                                Telefono:
-                            </label>
-                            <input
-                                className="form-control"
-                                name="telefono"
-                                type="text"
-                                onChange={handleChange}
-                                value={form.telefono}
-                            />
+                                    <label>
+                                        Fecha de consulta:
+                                    </label>
+                                    <input
+                                        className="form-control"
+                                        name="fecha_consulta"
+                                        type="text"
+                                        onChange={handleChange}
+                                        value={form.fecha_consulta}
+                                    />
+
+                                    <label>
+                                        Nombre Encargado:
+                                    </label>
+                                    <input
+                                        className="form-control"
+                                        name="encargado"
+                                        type="text"
+                                        onChange={handleChange}
+                                        value={form.encargado}
+                                    />
+                                </Col>
+                            </Row>
+
+                            <Row className='row row-table'>
+                                <Col md={16} className='col'>
+                                    <AddMedicamentos
+                                        optionsMed={props.optionsMed}
+                                        form={form}
+                                        obtenerMedicamentos={obtenerMedicamentos}
+                                    />
+                                </Col>
+                            </Row>
                         </Col>
-                    </Row>
-
-                    <Row className='row row-md'>
-                        <Col md={12} className='col'>
-                            <label>
-                                Motivo de Consulta:
-                            </label>
-                            <input
-                                className="form-control"
-                                name="motivo"
-                                type="text"
-                                onChange={handleChange}
-                                value={form.motivo}
-                            />
-
-                            <label>
-                                Fecha de consulta:
-                            </label>
-                            <input
-                                className="form-control"
-                                name="fecha_consulta"
-                                type="text"
-                                onChange={handleChange}
-                                value={form.fecha_consulta}
-                            />
-
-                            <label>
-                                Nombre Encargado:
-                            </label>
-                            <input
-                                className="form-control"
-                                name="encargado"
-                                type="text"
-                                onChange={handleChange}
-                                value={form.encargado}
-                            />
-                        </Col>
-                    </Row>
-
-                    <Row className='row row-table'>
-                        <Col md={16} className='col'>
-                            <AddMedicamentos
-                                optionsMed={props.optionsMed}
-                                form={form}
-                                handleChild={handleChild}
-                            />
-                        </Col>
-                    </Row>
-                    </Col>
                     </Row>
 
 

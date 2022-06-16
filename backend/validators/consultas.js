@@ -17,7 +17,7 @@ const validateCreate = [ // encargado,motivo,fecha_consulta,cod_paciente,genid,n
     check('cod_paciente')
         .exists()
         .not()
-        .isEmpty().withMessage("el codigo del estudiante o documento no puede estar vacio")
+        .isEmpty().withMessage("ingrese el código del estudiante")
         .isNumeric().withMessage("solo se permiten valores numericos"),
     check('fecha_consulta')
         .exists()

@@ -7,7 +7,6 @@ import {
     ModalBody,
     ModalFooter
 } from "reactstrap";
-import './Consultas.css'
 
 // Import Table :: Components
 import TablaConsulta from "../components/TablaConsulta";
@@ -21,6 +20,7 @@ class App extends Component {
             value: "",
             label: ""
         }],
+        hidden: true,
         currentPage: 0,
         totalItems: 0,
         modalMensaje: false,
@@ -70,7 +70,7 @@ class App extends Component {
             this.setState({
                 modalMensaje: false
             })
-        }, 2000)
+        }, 1000)
 
     }
     cerrarMensaje = () => {
@@ -79,6 +79,9 @@ class App extends Component {
         })
     }
     obtenerDatos = () => {
+        this.setState({
+            hidden: false
+        })
         ax.getCons().then(res => {
             var string = "";
             res.data.items.map(item => {
@@ -88,6 +91,7 @@ class App extends Component {
             this.setState({
                 data: res.data.items,
                 totalItems: res.data.total,
+                hidden: true
             })
         })
     }
@@ -161,7 +165,6 @@ class App extends Component {
                     status: res.status,
                     type: "error"
                 })
-                this.mostrarMensaje()
             }
             else {
                 ax.delMedCons(form.num_consulta).then((res) => {
@@ -199,9 +202,11 @@ class App extends Component {
                     status: res.status,
                     type: "success"
                 });
+
                 this.actualizarTabla()
-                this.mostrarMensaje()
+
             }
+            this.mostrarMensaje()
         })
 
     };
@@ -286,7 +291,7 @@ class App extends Component {
             },
         });
     };
-    handleChild = (form) => {
+    obtenerFormulario = (form) => {
         this.setState({
             form: form
         })
@@ -300,9 +305,10 @@ class App extends Component {
                     status={this.state.status}
                     message={this.state.message}
                     cerrarModal={this.cerrarMensaje}
-                    type = {this.state.type}
+                    type={this.state.type}
                 />
                 <TablaConsulta
+                    hidden={this.state.hidden}
                     list={this.state.data}
                     mostrarAgregar={this.mostrarModalInsertar}
                     mostrarEditar={this.mostrarModalActualizar}
@@ -328,7 +334,7 @@ class App extends Component {
                     <FormConsulta
                         optionsMed={this.state.optionsMeds}
                         encabezado={"Editar Registro"}
-                        handleChild={this.handleChild}
+                        obtenerFormulario={this.obtenerFormulario}
                         item={this.state.form}
                         cerrarModal={this.cerrarModalActualizar}
                         guardar={this.editar}
@@ -350,7 +356,7 @@ class App extends Component {
                         }
                         optionsMed={this.state.optionsMeds}
                         encabezado={"Agregar Consultas"}
-                        handleChild={this.handleChild}
+                        obtenerFormulario={this.obtenerFormulario}
                         cerrarModal={this.cerrarModalInsertar}
                         guardar={this.insertar}
                     />

@@ -11,12 +11,12 @@ const Result = (req, res, next) => {
 
 const validateCreate = [
     check('med_nombre')
-        .isString()
+        .isString().withMessage("El nombre debe ser una cade de texto")
         .notEmpty().withMessage("Por favor ingresar el nombre del medicamento")
         .exists().withMessage("incluya el med_nombre en el body"),
     check('stock')
-        .exists()
-        .isInt()
+        .exists().withMessage("Ingrese la cantidad de inventario del medicamento")
+        .isInt().withMessage("Ingrese la cantidad de inventario del medicamento")
         .custom((value, { req }) => {
             if (value <= 0) {
                 throw new Error("La cantidad de medicamentos debe ser mayor a 0")
@@ -26,7 +26,7 @@ const validateCreate = [
     check('cod_med')
         .isString()
         .notEmpty().withMessage("Por favor añadir el codigo del medicamento")
-        .exists().withMessage("incluya el cod_med en el body"),
+        .exists().withMessage("ingrese un código de medicamento"),
 
     check('fecha_ven')
         .isDate().withMessage("Por favor ingresar una fecha con el formato YYYY-MM-DD")

@@ -4,8 +4,8 @@ import {
 } from "reactstrap";
 import './Mensaje.css';
 
-import {BiErrorCircle} from 'react-icons/bi'
-import {AiOutlineCheckCircle} from 'react-icons/ai'
+import {GrClose,GrCheckmark} from 'react-icons/gr'
+
 const Mensaje = (props)=>{
     const type = `modal-content-msg mensaje-${props.type}`;
     let errorLogo = true;
@@ -25,13 +25,15 @@ return(
 
     <Modal isOpen = {props.mostrar} className={type} onClick={()=>{props.cerrarModal()}}>
         <div hidden = {errorLogo}>
-        <BiErrorCircle />
+        <GrClose />
         </div>
         <div hidden = {successLogo}>
-        <AiOutlineCheckCircle />
+        <GrCheckmark />
         </div>
-        <label >   Status: {props.status}</label>
+        <div className='modal-text'>
+        <label className='title'>Status: {props.status}</label>
         <label>{props.message}</label>
+        </div>
     </Modal>
 
 );

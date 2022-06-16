@@ -19,6 +19,7 @@ class App extends Component {
         modalActualizar: false,
         modalInsertar: false,
         modalMensaje: false,
+        hidden: true,
         message: "",
         status: "",
         type: "",
@@ -36,12 +37,16 @@ class App extends Component {
     }
     obtenerDatos = () => {
         var string = "";
+        this.setState({
+            hidden:false
+        })
         ax.getMeds().then(res => {
             res.data.map(item => {
                 string = item.fecha_ven;
                 item.fecha_ven = string.substring(0, 10);
             })
-            this.setState({ data: res.data })
+            this.setState({ data: res.data,
+             hidden:true})
         })
     }
     actualizarTabla = () => {
@@ -61,13 +66,11 @@ class App extends Component {
         this.setState({
             modalMensaje: true
         })
-        /*
         setTimeout(() => {
             this.setState({
                 modalMensaje: false
             })
-        }, 2000)
-        */
+        }, 1000)
 
     }
     cerrarMensaje = () => {
@@ -75,6 +78,7 @@ class App extends Component {
             modalMensaje: false
         })
     }
+
     mostrarModalEliminar = (dato) => {
         this.setState({
             form: dato,
@@ -215,6 +219,7 @@ class App extends Component {
                     type={this.state.type}
                 />
                 <TablaMedicamento
+                    hidden={this.state.hidden}
                     list={this.state.data}
                     mostrarAgregar={this.mostrarModalInsertar}
                     mostrarEditar={this.mostrarModalActualizar}
