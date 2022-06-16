@@ -10,7 +10,7 @@ import {
 
 // Import Table :: Components
 import TablaConsulta from "../components/TablaConsulta";
-import FormEditar from "../components/Formulario/FormEditar";
+import FormEditar from "../components/Formulario/FormConsulta";
 const ax = require("../api");
 class App extends Component {
     state = {
