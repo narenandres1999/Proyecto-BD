@@ -9,7 +9,7 @@ import { MdDelete } from "react-icons/md";
 
 import '../../../pages/Table.css'
 
-const FormMedicamentos = (props) => {
+const AddMedicamentos = (props) => {
     const [cantidad, setCantidad] = useState(0);
     const [selected, setSelected] = useState({});
     const [medicamentos, setMedicamentos] = useState(props.form.medicamentos);
@@ -106,4 +106,4 @@ const FormMedicamentos = (props) => {
         </>
     );
 }
-export default FormMedicamentos;
+export default AddMedicamentos;

@@ -10,7 +10,7 @@ import {
 
 import Select from 'react-select'
 import { useState } from "react";
-import FormMedicamentos from "./components/addMedicamentos";
+import AddMedicamentos from "./components/AddMedicamentos";
 const FormConsulta = (props) => {
     const [form, setForm] = useState(props.item)
     const options = [
@@ -150,7 +150,7 @@ const FormConsulta = (props) => {
 
                     <Row className='row row-table'>
                         <Col md={16} className='col'>
-                            <FormMedicamentos
+                            <AddMedicamentos
                                 optionsMed={props.optionsMed}
                                 form={form}
                                 handleChild={handleChild}

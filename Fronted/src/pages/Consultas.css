@@ -1,0 +1,150 @@
+.acciones {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row wrap;
+}
+
+.acciones-title {
+    text-align: center !important;
+}
+
+.acciones button {
+    margin-right: 5px;
+    padding: 5px 10px;
+}
+
+tr {
+    font-size: 16px;
+    text-align: left;
+}
+
+th {
+    text-transform: uppercase;
+}
+
+.button-components {
+    margin: 50px auto;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.button-components button {
+    font-weight: bold;
+    padding: 8px 30px;
+    margin-left: 50px;
+}
+
+.button-components .title-components h1 {
+    font-size: 24px; 
+    font-weight: bold;
+    color: #384359;
+}
+
+@media screen and (max-width: 1080px) {
+
+    .button-components .title-components h1 {
+        font-size: 18px;
+    }
+    
+}
+
+.search-div {
+    width: 30%;
+}
+
+.search-div .rounded {
+    border-radius: 50px !important;
+    padding: 5px 20px;
+}
+
+.search-div input:focus {
+    outline: none !important;
+    border-color: rgba(0,0,0,.3);
+    box-shadow:  none;;
+}
+
+label {
+    font-weight: bold;
+    color: rgba(0,0,0,.5);
+    margin: 10px 0px;
+}
+
+ModalBody > input {
+    border-radius: none !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(0,0,0,1) !important;
+
+}
+input:focus {
+    outline: none !important;
+    border-color: rgba(0,0,0,.3) !important;
+    box-shadow: none !important;
+}
+
+div > h3 {
+    color: #384359;
+    font-size: 24px !important;
+    font-weight: bold;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.pagination .pagination-link { 
+    color: #384359 !important;
+}
+
+.paginationLinkStyle {
+    color: #384359; 
+
+}
+
+.paginationLinkStyle:focus {
+    background: #EF4665 !important;
+}
+
+.paginationLinkStyle:hover {
+    background: rgba(0,0,0,.1);
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #EF4665 !important;
+    border-color: #EF4665 !important;
+}
+
+.page-link {
+    box-shadow: none !important;
+    transition: all .3s ease;    
+}
+
+.page-link:hover {
+    color: #384359 !important;
+}
+
+.page-link {
+    color: #384359 !important;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #EF4665 !important;
+    border-color: #EF4665 !important;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #384359;
+    border-color: #384359;
+}
+
+.disabled .page-link {
+    color: rgba(0,0,0,.4) !important;
+    background:  rgba(0,0,0,.05) !important;
+}

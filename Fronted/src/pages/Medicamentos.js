@@ -21,6 +21,7 @@ class App extends Component {
         modalMensaje: false,
         message: "",
         status: "",
+        type: "",
         form: {
             id_med: "",
             med_nombre: "",
@@ -60,12 +61,13 @@ class App extends Component {
         this.setState({
             modalMensaje: true
         })
-
+        /*
         setTimeout(() => {
             this.setState({
                 modalMensaje: false
             })
         }, 2000)
+        */
 
     }
     cerrarMensaje = () => {
@@ -117,7 +119,8 @@ class App extends Component {
             if (!(res.data.errors === undefined)) {
                 this.setState({
                     message: res.data.errors[0].msg,
-                    status: 300
+                    status: 300,
+                    type: "error"
                 })
                 this.mostrarMensaje()
             }
@@ -125,7 +128,8 @@ class App extends Component {
                 this.setState({
                     modalActualizar: false,
                     message: res.data.message,
-                    status: res.status
+                    status: res.status,
+                    type: "success"
                 });
                 this.mostrarMensaje()
                 this.actualizarTabla();
@@ -138,7 +142,8 @@ class App extends Component {
             if (!(res.data.errors === undefined)) {
                 this.setState({
                     message: res.data.errors[0].msg,
-                    status: res.status
+                    status: res.status,
+                    type: "error"
                 })
                 this.mostrarMensaje()
             }
@@ -146,7 +151,8 @@ class App extends Component {
                 this.setState({
                     modalEliminar: false,
                     message: res.data.message,
-                    status: res.status
+                    status: res.status,
+                    type: "success"
                 });
                 this.mostrarMensaje();
                 this.actualizarTabla();
@@ -165,13 +171,19 @@ class App extends Component {
             if (!(res.data.errors === undefined)) {
                 this.setState({
                     message: res.data.errors[0].msg,
-                    status: 300
+                    status: 300,
+                    type: "error"
                 })
                 this.mostrarMensaje()
             }
             else {
 
-                this.setState({ modalInsertar: false, message: res.data.message, status: res.status });
+                this.setState({
+                    modalInsertar: false,
+                    message: res.data.message,
+                    status: res.status,
+                    type: "success"
+                });
                 this.mostrarMensaje();
                 this.actualizarTabla();
             }
@@ -200,6 +212,7 @@ class App extends Component {
                     status={this.state.status}
                     message={this.state.message}
                     cerrarModal={this.cerrarMensaje}
+                    type={this.state.type}
                 />
                 <TablaMedicamento
                     list={this.state.data}

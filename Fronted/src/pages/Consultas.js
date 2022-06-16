@@ -7,6 +7,7 @@ import {
     ModalBody,
     ModalFooter
 } from "reactstrap";
+import './Consultas.css'
 
 // Import Table :: Components
 import TablaConsulta from "../components/TablaConsulta";
@@ -25,6 +26,7 @@ class App extends Component {
         modalMensaje: false,
         message: "",
         status: "",
+        type: "",
         consultaActual: 0,
         modalActualizar: false,
         modalInsertar: false,
@@ -156,7 +158,8 @@ class App extends Component {
             if (!(res.data.errors === undefined)) {
                 this.setState({
                     message: res.data.errors[0].msg,
-                    status: res.status
+                    status: res.status,
+                    type: "error"
                 })
                 this.mostrarMensaje()
             }
@@ -165,7 +168,8 @@ class App extends Component {
                     if (!(res.data.errors === undefined)) {
                         this.setState({
                             message: res.data.errors[0].msg,
-                            status: res.status
+                            status: res.status,
+                            type: "error"
                         })
                     }
                     else {
@@ -180,7 +184,8 @@ class App extends Component {
                                     if (!(res.data.errors === undefined)) {
                                         this.setState({
                                             message: res.data.errors[0].msg,
-                                            status: res.status
+                                            status: res.status,
+                                            type: "error"
                                         })
                                     }
                                 })
@@ -191,7 +196,8 @@ class App extends Component {
                 this.setState({
                     modalActualizar: false,
                     message: res.data.message,
-                    status: res.status
+                    status: res.status,
+                    type: "success"
                 });
                 this.actualizarTabla()
                 this.mostrarMensaje()
@@ -205,7 +211,8 @@ class App extends Component {
             if (!(res.data.errors === undefined)) {
                 this.setState({
                     message: res.data.errors[0].msg,
-                    status: 300
+                    status: 300,
+                    type: "error"
                 })
                 this.mostrarMensaje()
             }
@@ -213,7 +220,8 @@ class App extends Component {
                 this.setState({
                     modalEliminar: false,
                     message: res.data.message,
-                    status: res.status
+                    status: res.status,
+                    type: "success"
                 });
                 this.mostrarMensaje();
                 this.cleanForm();
@@ -236,7 +244,8 @@ class App extends Component {
             if (!(res.data.errors === undefined)) {
                 this.setState({
                     message: res.data.errors[0].msg,
-                    status: 300
+                    status: 300,
+                    type: "error"
                 })
                 this.mostrarMensaje()
             }
@@ -261,7 +270,8 @@ class App extends Component {
                 this.setState({
                     modalInsertar: false,
                     message: res.data.message,
-                    status: res.status
+                    status: res.status,
+                    type: "success"
                 });
                 this.mostrarMensaje();
                 this.actualizarTabla();
@@ -290,6 +300,7 @@ class App extends Component {
                     status={this.state.status}
                     message={this.state.message}
                     cerrarModal={this.cerrarMensaje}
+                    type = {this.state.type}
                 />
                 <TablaConsulta
                     list={this.state.data}

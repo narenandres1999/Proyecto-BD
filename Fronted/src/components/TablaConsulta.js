@@ -73,7 +73,11 @@ const TablaConsulta = (props) => {
           <tbody style={{ overflow: 'auto' }}>
             {props.list
               .filter(item =>
-                item.nombre.toLowerCase().includes(search) || 
+                item.nombre.includes(search) ||
+                item.genero.includes(search) ||
+                item.encargado.includes(search) ||
+                // ToLowerCase
+                item.nombre.toLowerCase().includes(search) ||
                 item.genero.toLowerCase().includes(search) ||
                 item.cod_paciente.toString().includes(search) ||
                 item.fecha_consulta.includes(search) ||

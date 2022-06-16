@@ -1,7 +1,25 @@
-.mensaje{
+.modal-content-msg {
     z-index: 9999;
-    padding: 5px;
+    padding: 15px !important;
 }
-.mensaje label{
+
+.modal-content-msg svg {
+    font-size: 5rem;
+}
+
+.modal-content-msg .modal-content {
+    padding: 15px !important;
     text-align: center;
+}
+
+.mensaje-success {
+
+}
+.mensaje-error{
+
+}
+
+
+.mensaje-success svg {
+
 }

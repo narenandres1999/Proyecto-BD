@@ -1,6 +1,7 @@
 import {
     Pagination, PaginationItem, PaginationLink
   } from "reactstrap";
+  import '../pages/Consultas.css'
 const PaginationData = (props) => {
 
     // Total de paginas dentro de la paginacion
