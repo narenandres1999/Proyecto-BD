@@ -14,28 +14,28 @@ import FormEditar from "../components/Formulario/FormEditar";
 const ax = require("../api");
 class App extends Component {
     state = {
-            data: [],
-            optionsMeds: [{
-                value: "",
-                label: ""
-            }],
-            currentPage: 0,
-            totalItems: 0,
-            consultaActual:0,
-            modalActualizar: false,
-            modalInsertar: false,
-            form: {
-                num_consulta: "",
-                nombre: "",
-                cod_paciente: "",
-                genero: null,
-                telefono: "",
-                motivo: "",
-                fecha_consulta: "",
-                encargado: "",
-                medicamentos: []
-            },
-        };
+        data: [],
+        optionsMeds: [{
+            value: "",
+            label: ""
+        }],
+        currentPage: 0,
+        totalItems: 0,
+        consultaActual: 0,
+        modalActualizar: false,
+        modalInsertar: false,
+        form: {
+            num_consulta: "",
+            nombre: "",
+            cod_paciente: "",
+            genero: null,
+            telefono: "",
+            motivo: "",
+            fecha_consulta: "",
+            encargado: "",
+            medicamentos: []
+        },
+    };
 
     componentDidMount() {
         this.obtenerDatos();
@@ -131,7 +131,7 @@ class App extends Component {
             "nombre": form.nombre,
             "telefono": form.telefono
         }
-        ax.putCons(form.num_consulta, body).then(()=>{
+        ax.putCons(form.num_consulta, body).then(() => {
             this.setState({ modalActualizar: false });
             this.actualizarTabla()
         })
@@ -172,21 +172,20 @@ class App extends Component {
                 ...this.state,
                 consultaActual: res.data.num_consulta.max
             })
-            this.actualizarTabla();
-            if (form.medicamentos.length > 0){
-            ax.delMedCons(this.state.consultaActual).then(() => {
-                if (form.medicamentos.length > 0) {
+            if (form.medicamentos.length > 0) {
+                ax.delMedCons(this.state.consultaActual).then(() => {
                     form.medicamentos.map(item => {
-    
+
                         const med = {
                             id_med: item.id_med,
                             cantidad: item.cantidad
                         }
-                        ax.postMedCons(this.state.consultaActual,med)
+                        ax.postMedCons(this.state.consultaActual, med)
+                        
                     })
-                }
-            })
-        }
+                })
+            }
+            this.actualizarTabla();
         })
         this.setState({ modalInsertar: false });
     }
@@ -204,7 +203,7 @@ class App extends Component {
         })
     }
     render() {
-        
+
         return (
             <>
 
@@ -214,7 +213,7 @@ class App extends Component {
                     mostrarEditar={this.mostrarModalActualizar}
                     mostrarEliminar={this.mostrarModalEliminar}
                 />
-                <Modal isOpen={this.state.modalEliminar} style={{position: 'absolute', top: '45%', right: '50%', transform: 'translate(50%,-50%)'}}>
+                <Modal isOpen={this.state.modalEliminar} style={{ position: 'absolute', top: '45%', right: '50%', transform: 'translate(50%,-50%)' }}>
                     <ModalHeader>
                         <div><h3>Eliminar registro</h3></div>
                         <ModalBody>

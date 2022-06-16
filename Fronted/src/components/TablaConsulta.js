@@ -1,116 +1,110 @@
 import {
-    Table,
-    Button,
-    Container,
-    Pagination, PaginationItem, PaginationLink
+  Table,
+  Button,
+  Container
 } from "reactstrap";
 import '../pages/Table.css'
 import { MdEdit, MdDelete } from "react-icons/md";
-import { useState } from "react";
+import { useState} from "react";
+import PaginationData from "./Pagination"
 const TablaConsulta = (props) => {
-    const [listFilter,setListFilter] = useState(props.list);
-    const [search,setSearch] = useState("");
-    const filter = (e)=>{
+  const [search, setSearch] = useState("");
+  // Inicio de los elementos necesarios para la paginación
+  const pageSize = 5
+  const [currentPage, setCurrentPage] = useState(0)
+  const pagesCount = Math.ceil(props.list.length / pageSize)
+  const handleClick = (e, index) => {
+    e.preventDefault();
+    setCurrentPage(index)
+}
+  // Fin De los elementos necesarios para la paginación
 
-    }
+  const filter = (e) => {
+    setSearch(e.target.value)
+    /*let list = [];
+    props.list.map(item => {
+      if (item.nombre.toLowerCase().includes(search)) {
+        list.push(item)
+        setListFilter(list);
 
-    return (
-        <>                
-        
-        <div className='main-components'>
-            <div className='title-components'>
+        actualizarTabla();
+      }
+    })
+    console.log(listFilter)*/
+  }
+  return (
+    <>
 
-                <h1>Consultas medicas</h1></div>
+      <div className='main-components'>
+        <div className='title-components'>
 
-                <div class="search-div input-group rounded">
-                <input 
-                type="search" 
-                class="form-control rounded" 
-                placeholder="Buscar" 
-                aria-label="Search" 
-                aria-describedby="search-addon"
-                name = "buscar"
-                value = {search} 
-                onChange = {filter}
-                />
+          <h1>Consultas medicas</h1></div>
 
-            </div>                
-                <Button color="danger" onClick={() => props.mostrarAgregar()}>Agregar consultas</Button>                
+        <div class="search-div input-group rounded">
+          <input
+            type="search"
+            class="form-control rounded"
+            placeholder="Buscar"
+            aria-label="Search"
+            aria-describedby="search-addon"
+            name="search"
+            value={search}
+            onChange={filter}
+          />
+
         </div>
+        <Button color="danger" onClick={() => props.mostrarAgregar()}>Agregar consultas</Button>
+      </div>
 
 
 
-            <Container fluid>
-                <Table className='table table-borderless table-hover' style={{width: '100%'}}>
-                    <thead className='table-light table-thead'>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Codigo de estudiante</th>
-                            <th>Genero</th>
-                            <th>Telefono</th>
-                            <th>Motivo</th>
-                            <th>Fecha de consulta</th>
-                            <th>Firma</th>
-                            <th className='acciones-title'>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody style={{overflow:'auto'}}>
-                        {props.list.map((item) => (
-                            <tr key={item.num_consulta} >
-                                <td>{item.num_consulta}</td>
-                                <td>{item.nombre}</td>
-                                <td>{item.cod_paciente}</td>
-                                <td>{item.genero}</td>
-                                <td>{item.telefono}</td>
-                                <td>{item.motivo}</td>
-                                <td>{item.fecha_consulta}</td>
-                                <td>{item.encargado}</td>
-                                <td className='acciones'>
-                                    <Button color="secondary" onClick={() => props.mostrarEditar(item)}><MdEdit /></Button>
-                                    <Button color="danger" onClick={() => props.mostrarEliminar(item)}><MdDelete /></Button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
-                <Pagination aria-label="Page navigation example">
+      <Container fluid>
+      <PaginationData
+        currentPage = {currentPage}
+        handleClick = {handleClick}
+        pagesCount = {pagesCount}
+        />
+        <Table className='table table-borderless table-hover' style={{ width: '100%' }}>
+          <thead className='table-light table-thead'>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Codigo de estudiante</th>
+              <th>Genero</th>
+              <th>Telefono</th>
+              <th>Motivo</th>
+              <th>Fecha de consulta</th>
+              <th>Firma</th>
+              <th className='acciones-title'>Acciones</th>
+            </tr>
+          </thead>
+          <tbody style={{ overflow: 'auto' }}>
+            {props.list
+            .slice(
+              currentPage * pageSize,
+              (currentPage + 1) * pageSize
+          )
+            .map((item) => (
+              <tr key={item.num_consulta} >
+                <td>{item.num_consulta}</td>
+                <td>{item.nombre}</td>
+                <td>{item.cod_paciente}</td>
+                <td>{item.genero}</td>
+                <td>{item.telefono}</td>
+                <td>{item.motivo}</td>
+                <td>{item.fecha_consulta}</td>
+                <td>{item.encargado}</td>
+                <td className='acciones'>
+                  <Button color="secondary" onClick={() => props.mostrarEditar(item)}><MdEdit /></Button>
+                  <Button color="danger" onClick={() => props.mostrarEliminar(item)}><MdDelete /></Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
 
-        <PaginationItem>
-          <PaginationLink previous href="#" />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">
-            1
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">
-            2
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">
-            3
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">
-            4
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">
-            5
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink next href="#" />
-        </PaginationItem>
-      </Pagination>
-
-            </Container>
-        </>
-    );
+      </Container>
+    </>
+  );
 }
 export default TablaConsulta;

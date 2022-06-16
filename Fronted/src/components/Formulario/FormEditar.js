@@ -16,19 +16,19 @@ import { useState } from "react";
 import FormMedicamentos from "./components/FormMedicamentos";
 const FormEditar = (props) => {
     const [form, setForm] = useState(props.item)
+    const options = [
+        { value: 'Masculino', label: 'Masculino' },
+        { value: 'Femenino', label: 'Femenino' }
+    ]
     const handleChange = (e) => {
         let target = e.target
-        console.log(form)
         setForm({
             ...form,
             [target.name]: target.value
         })
         props.handleChild(form)
     }
-    const options = [
-        { value: 'Masculino', label: 'Masculino' },
-        { value: 'Femenino', label: 'Femenino' }
-    ]
+
     const changeGen = (genero) => {
         setForm({
             ...form,
