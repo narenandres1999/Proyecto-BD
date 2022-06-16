@@ -5,9 +5,10 @@ import {
 } from "reactstrap";
 import '../pages/Table.css'
 import { MdEdit, MdDelete } from "react-icons/md";
-import { useState} from "react";
+import { useState } from "react";
 import PaginationData from "./Pagination"
 const TablaConsulta = (props) => {
+  // hooks para el filtrado en la lista
   const [search, setSearch] = useState("");
   // Inicio de los elementos necesarios para la paginación
   const pageSize = 5
@@ -16,21 +17,11 @@ const TablaConsulta = (props) => {
   const handleClick = (e, index) => {
     e.preventDefault();
     setCurrentPage(index)
-}
+  }
   // Fin De los elementos necesarios para la paginación
 
   const filter = (e) => {
     setSearch(e.target.value)
-    /*let list = [];
-    props.list.map(item => {
-      if (item.nombre.toLowerCase().includes(search)) {
-        list.push(item)
-        setListFilter(list);
-
-        actualizarTabla();
-      }
-    })
-    console.log(listFilter)*/
   }
   return (
     <>
@@ -59,10 +50,10 @@ const TablaConsulta = (props) => {
 
 
       <Container fluid>
-      <PaginationData
-        currentPage = {currentPage}
-        handleClick = {handleClick}
-        pagesCount = {pagesCount}
+        <PaginationData
+          currentPage={currentPage}
+          handleClick={handleClick}
+          pagesCount={pagesCount}
         />
         <Table className='table table-borderless table-hover' style={{ width: '100%' }}>
           <thead className='table-light table-thead'>
@@ -80,26 +71,33 @@ const TablaConsulta = (props) => {
           </thead>
           <tbody style={{ overflow: 'auto' }}>
             {props.list
-            .slice(
-              currentPage * pageSize,
-              (currentPage + 1) * pageSize
-          )
-            .map((item) => (
-              <tr key={item.num_consulta} >
-                <td>{item.num_consulta}</td>
-                <td>{item.nombre}</td>
-                <td>{item.cod_paciente}</td>
-                <td>{item.genero}</td>
-                <td>{item.telefono}</td>
-                <td>{item.motivo}</td>
-                <td>{item.fecha_consulta}</td>
-                <td>{item.encargado}</td>
-                <td className='acciones'>
-                  <Button color="secondary" onClick={() => props.mostrarEditar(item)}><MdEdit /></Button>
-                  <Button color="danger" onClick={() => props.mostrarEliminar(item)}><MdDelete /></Button>
-                </td>
-              </tr>
-            ))}
+              .filter(item =>
+                item.nombre.toLowerCase().includes(search) || 
+                item.genero.toLowerCase().includes(search) ||
+                item.cod_paciente.toString().includes(search) ||
+                item.fecha_consulta.includes(search) ||
+                item.encargado.toLowerCase().includes(search)
+              )
+              .slice(
+                currentPage * pageSize,
+                (currentPage + 1) * pageSize
+              )
+              .map((item) => (
+                <tr key={item.num_consulta} >
+                  <td>{item.num_consulta}</td>
+                  <td>{item.nombre}</td>
+                  <td>{item.cod_paciente}</td>
+                  <td>{item.genero}</td>
+                  <td>{item.telefono}</td>
+                  <td>{item.motivo}</td>
+                  <td>{item.fecha_consulta}</td>
+                  <td>{item.encargado}</td>
+                  <td className='acciones'>
+                    <Button color="secondary" onClick={() => props.mostrarEditar(item)}><MdEdit /></Button>
+                    <Button color="danger" onClick={() => props.mostrarEliminar(item)}><MdDelete /></Button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </Table>
 
