@@ -31,30 +31,36 @@ class App extends Component {
             fecha_ven: ""
         },
     };
-
     componentDidMount() {
         this.obtenerDatos();
     }
+    // Función que obtiene los datos de medicamentos de la base de datos
     obtenerDatos = () => {
         var string = "";
         this.setState({
-            hidden:false
+            hidden: false
         })
         ax.getMeds().then(res => {
             res.data.map(item => {
                 string = item.fecha_ven;
                 item.fecha_ven = string.substring(0, 10);
+                return null;
             })
-            this.setState({ data: res.data,
-             hidden:true})
+            this.setState({
+                data: res.data,
+                hidden: true
+            })
         })
     }
+    // Metodo que me permite actualizar la informacion de la tabla
     actualizarTabla = () => {
         this.setState({
             data: []
         })
         setTimeout(this.obtenerDatos(), 3000)
     }
+    // Función que hace visible el formulario para actualizar un registro
+    // recibe un formulario desde un componente hijo
     mostrarModalActualizar = (dato) => {
         this.setState({
             form: dato,
@@ -62,6 +68,15 @@ class App extends Component {
         });
 
     };
+    // Función que hace visible el formulario de añadir un nuevo registro
+    mostrarModalInsertar = () => {
+        this.cleanForm();
+        this.setState({
+            modalInsertar: true,
+        });
+    };
+
+    // Función que hace visible el mensaje error/success y durara dependiendo del tipo
     mostrarMensaje = () => {
         this.setState({
             modalMensaje: true
@@ -73,24 +88,33 @@ class App extends Component {
         }, 1000)
 
     }
+    // Función que se cerrara el mensaje si se presiona en la ventana
     cerrarMensaje = () => {
         this.setState({
             modalMensaje: false
         })
     }
-
+    // Función que hace visible la ventana de confirmacion de eliminación
     mostrarModalEliminar = (dato) => {
         this.setState({
             form: dato,
             modalEliminar: true,
         });
     };
+
+    // Función que oculta el formulario de actualización
     cerrarModalActualizar = () => {
         this.setState({ modalActualizar: false });
     };
+    // Función que oculta la ventana de confirmación de eliminación
     cerrarModalEliminar = () => {
         this.setState({ modalEliminar: false });
     };
+    // Función que oculta el formulación de añadir registros
+    cerrarModalInsertar = () => {
+        this.setState({ modalInsertar: false });
+    };
+    // Función que limpia los campos del formulario
     cleanForm = () => {
         this.setState({
             form: {
@@ -102,16 +126,8 @@ class App extends Component {
             }
         })
     }
-    mostrarModalInsertar = () => {
-        this.cleanForm();
-        this.setState({
-            modalInsertar: true,
-        });
-    };
-
-    cerrarModalInsertar = () => {
-        this.setState({ modalInsertar: false });
-    };
+    // Función del botón guardar en el formulario editar registro
+    // Recibe un formulario de un componente hijo
     editar = (form) => {
         let body = {
             med_nombre: form.med_nombre,
@@ -140,7 +156,7 @@ class App extends Component {
             }
         })
     };
-
+    // Función del botón eliminar en la ventana de eliminación
     eliminar = () => {
         ax.delMed(this.state.form.id_med).then((res) => {
             if (!(res.data.errors === undefined)) {
@@ -163,7 +179,8 @@ class App extends Component {
             }
         })
     };
-
+    // Función del botón guardar en el formulario añadir registro
+    // recibe un formulario de un componente hijo
     insertar = (form) => {
         var body = {
             med_nombre: form.med_nombre,
@@ -194,14 +211,7 @@ class App extends Component {
         })
 
     }
-    handleChange = (e) => {
-        this.setState({
-            form: {
-                ...this.state.form,
-                [e.target.name]: e.target.value,
-            },
-        });
-    };
+    // Función que recibe el formulario controlado desde un componente hijo
     handleChild = (form) => {
         this.setState({
             form: form
@@ -211,13 +221,15 @@ class App extends Component {
 
         return (
             <>
-                <Mensaje
-                    mostrar={this.state.modalMensaje}
-                    status={this.state.status}
-                    message={this.state.message}
-                    cerrarModal={this.cerrarMensaje}
-                    type={this.state.type}
-                />
+                {this.state.modalMensaje &&
+                    <Mensaje
+                        mostrar={this.state.modalMensaje}
+                        status={this.state.status}
+                        message={this.state.message}
+                        cerrarModal={this.cerrarMensaje}
+                        type={this.state.type}
+                    />
+                }
                 <TablaMedicamento
                     hidden={this.state.hidden}
                     list={this.state.data}
@@ -225,53 +237,59 @@ class App extends Component {
                     mostrarEditar={this.mostrarModalActualizar}
                     mostrarEliminar={this.mostrarModalEliminar}
                 />
-                <Modal isOpen={this.state.modalEliminar} style={{ position: 'absolute', top: '45%', right: '50%', transform: 'translate(50%,-50%)' }}>
-                    <ModalHeader>
-                        <div><h3>Eliminar registro</h3></div>
-                        <ModalBody>
-                            <p className='text'>¿Esta seguro que desea eliminar este registro?</p>
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button
-                                color="secondary"
-                                onClick={() => this.eliminar()}>Eliminar</Button>
-                            <Button
-                                color="danger"
-                                onClick={() => this.cerrarModalEliminar()}>Cancelar</Button>
-                        </ModalFooter>
-                    </ModalHeader>
-                </Modal>
-                <Modal isOpen={this.state.modalActualizar}>
-                    <FormMedicamento
-                        mostrar={this.state.modalMensaje}
-                        status={this.state.status}
-                        message={this.state.message}
-                        encabezado={"Editar Registro"}
-                        handleChild={this.handleChild}
-                        item={this.state.form}
-                        cerrarModal={this.cerrarModalActualizar}
-                        guardar={this.editar}
-                    />
-                </Modal>
-                <Modal isOpen={this.state.modalInsertar}>
-                    <FormMedicamento
-                        item={{
-                            id_med: "",
-                            med_nombre: "",
-                            cod_med: "",
-                            stock: 0,
-                            fecha_ven: ""
-                        }
-                        }
-                        mostrar={this.state.modalMensaje}
-                        status={this.state.status}
-                        message={this.state.message}
-                        encabezado={"Agregar Medicamentos"}
-                        handleChild={this.handleChild}
-                        cerrarModal={this.cerrarModalInsertar}
-                        guardar={this.insertar}
-                    />
-                </Modal>
+                {this.state.modalEliminar &&
+                    <Modal isOpen={this.state.modalEliminar} style={{ position: 'absolute', top: '45%', right: '50%', transform: 'translate(50%,-50%)' }}>
+                        <ModalHeader>
+                            <div><h3>Eliminar registro</h3></div>
+                            <ModalBody>
+                                <p className='text'>¿Esta seguro que desea eliminar este registro?</p>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button
+                                    color="secondary"
+                                    onClick={() => this.eliminar()}>Eliminar</Button>
+                                <Button
+                                    color="danger"
+                                    onClick={() => this.cerrarModalEliminar()}>Cancelar</Button>
+                            </ModalFooter>
+                        </ModalHeader>
+                    </Modal>
+                }
+                {this.state.modalActualizar &&
+                    <Modal isOpen={this.state.modalActualizar}>
+                        <FormMedicamento
+                            mostrar={this.state.modalMensaje}
+                            status={this.state.status}
+                            message={this.state.message}
+                            encabezado={"Editar Registro"}
+                            handleChild={this.handleChild}
+                            item={this.state.form}
+                            cerrarModal={this.cerrarModalActualizar}
+                            guardar={this.editar}
+                        />
+                    </Modal>
+                }
+                {this.state.modalInsertar &&
+                    <Modal isOpen={this.state.modalInsertar}>
+                        <FormMedicamento
+                            item={{
+                                id_med: "",
+                                med_nombre: "",
+                                cod_med: "",
+                                stock: 0,
+                                fecha_ven: ""
+                            }
+                            }
+                            mostrar={this.state.modalMensaje}
+                            status={this.state.status}
+                            message={this.state.message}
+                            encabezado={"Agregar Medicamentos"}
+                            handleChild={this.handleChild}
+                            cerrarModal={this.cerrarModalInsertar}
+                            guardar={this.insertar}
+                        />
+                    </Modal>
+                }
             </>
         );
     }

@@ -1,6 +1,6 @@
 import "./Loading.css";
 
-const Loading = (props) => {
+const App = (props) => {
     return (
             <div  class="center" hidden = {props.hidden}>
                 <div class="wave"></div>
@@ -17,4 +17,4 @@ const Loading = (props) => {
     );
 }
 
-export default Loading;
+export default App;

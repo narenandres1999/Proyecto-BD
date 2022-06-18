@@ -7,18 +7,16 @@ import {
     ModalBody,
     ModalFooter
 } from "reactstrap";
-
 import Select from 'react-select'
 import { useState } from "react";
 import AddMedicamentos from "./components/AddMedicamentos";
-import Mensaje from "../Mensaje";
-const FormConsulta = (props) => {
+const App = (props) => {
     const [form, setForm] = useState(props.item)
-
     const options = [
         { value: 'Masculino', label: 'Masculino' },
         { value: 'Femenino', label: 'Femenino' }
     ]
+    // Función que controla los cambios en los imputs
     const handleChange = (e) => {
         let target = e.target
         setForm({
@@ -27,13 +25,14 @@ const FormConsulta = (props) => {
         })
         props.obtenerFormulario(form)
     }
-
+    // Función que controla la selcción de genero
     const changeGen = (genero) => {
         setForm({
             ...form,
             genero: genero.value
         })
     }
+    // Función que obtiene los medicamentos de un componente hijo (AddMedicamentos)
     const obtenerMedicamentos = (medicamentos) => {
         setForm({
             ...form,
@@ -94,6 +93,7 @@ const FormConsulta = (props) => {
                                             if (item.value === form.genero) {
                                                 return { value: form.genero, label: item.label }
                                             }
+                                            return null;
                                         })}
                                         onChange={changeGen}
                                         className="select"
@@ -132,11 +132,11 @@ const FormConsulta = (props) => {
                                     <input
                                         className="form-control"
                                         name="fecha_consulta"
+                                        placeholder="YYYY-MM-DD"
                                         type="text"
                                         onChange={handleChange}
                                         value={form.fecha_consulta}
                                     />
-
                                     <label>
                                         Nombre Encargado:
                                     </label>
@@ -153,6 +153,7 @@ const FormConsulta = (props) => {
                             <Row className='row row-table'>
                                 <Col md={16} className='col'>
                                     <AddMedicamentos
+                                        obtenerMensaje = {props.obtenerMensaje}
                                         optionsMed={props.optionsMed}
                                         form={form}
                                         obtenerMedicamentos={obtenerMedicamentos}
@@ -179,4 +180,4 @@ const FormConsulta = (props) => {
     );
 }
 
-export default FormConsulta;
+export default App;

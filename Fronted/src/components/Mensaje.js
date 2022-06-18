@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
     Modal,
 } from "reactstrap";
@@ -6,7 +5,7 @@ import './Mensaje.css';
 
 import {GrClose,GrCheckmark} from 'react-icons/gr'
 
-const Mensaje = (props)=>{
+const App = (props)=>{
     const type = `modal-content-msg mensaje-${props.type}`;
     let errorLogo = true;
     let successLogo = true;
@@ -38,4 +37,4 @@ return(
 
 );
 }
-export default Mensaje;
+export default App;

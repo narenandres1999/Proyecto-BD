@@ -2,7 +2,7 @@ import {
     Pagination, PaginationItem, PaginationLink
   } from "reactstrap";
 import '../pages/Table.css'
-const PaginationData = (props) => {
+const App = (props) => {
 
     // Total de paginas dentro de la paginacion
     return (
@@ -60,4 +60,4 @@ const PaginationData = (props) => {
         </div>
     )
 }
-export default PaginationData;
+export default App;

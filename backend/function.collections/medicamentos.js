@@ -10,7 +10,7 @@ const getMeds = (req, res) => {
         res.json(result.rows);
     })
 }
-
+// Permite añadir nuevos medicamentos a la base de datos
 const postMeds = (req, res) => {
     const { cod_med, med_nombre, fecha_ven, stock } = req.body;
     db.query("INSERT INTO medicamentos (cod_med,med_nombre,fecha_ven,stock) values ($1,$2,$3,$4);",
@@ -23,6 +23,7 @@ const postMeds = (req, res) => {
         })
 }
 // ruta (/:id_med)
+// Obtiene un medicamento en especifico
 const getOneMed = (req,res)=>{
     const id_med = req.params.id_med;
     db.query("SELECT * FROM medicamentos WHERE borrado = false AND id_med = $1",[id_med] ,(err, result) => {
@@ -32,7 +33,7 @@ const getOneMed = (req,res)=>{
         res.json(result.rows);
     })
 }
-
+// Actualiza los datos de un medicamento
 const putMed = (req, res) => {
     const id_med = req.params.id_med;
     const { cod_med, med_nombre, fecha_ven, stock } = req.body;
@@ -45,7 +46,7 @@ const putMed = (req, res) => {
             res.json({ message: "Se ha actualizado con exito", result })
         })
 }
-
+// Elimina el medicamento
 const delMed = (req, res) => {
     const id_med = req.params.id_med;
     db.query("update medicamentos set borrado = true where id_med = $1;",[id_med],(err,result)=>{

@@ -8,7 +8,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import { useState } from "react";
 import PaginationData from "./Pagination"
 import Loading from "./Loading";
-const TablaMedicamento = (props) => {
+const App = (props) => {
   // hooks para el filtrado en la lista
   const [search, setSearch] = useState("");
   // Inicio de los elementos necesarios para la paginación
@@ -102,4 +102,4 @@ const TablaMedicamento = (props) => {
     </>
   );
 }
-export default TablaMedicamento;
+export default App;

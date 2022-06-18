@@ -8,7 +8,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import { useState } from "react";
 import PaginationData from "./Pagination";
 import Loading from "./Loading";
-const TablaConsulta = (props) => {
+const App = (props) => {
   // hooks para el filtrado en la lista
   const [search, setSearch] = useState("");
   // Inicio de los elementos necesarios para la paginación
@@ -112,4 +112,4 @@ const TablaConsulta = (props) => {
     </>
   );
 }
-export default TablaConsulta;
+export default App;

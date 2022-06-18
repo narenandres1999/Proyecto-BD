@@ -95,6 +95,7 @@ const postMedCons = (req,res)=>{
         res.json({"message":"se añadio con exito",result});
     })
 }
+// elimia los medicamentos de una consulta
 const deleteMedCons = (req,res)=>{
     const id = req.params.num_consulta;
     db.query("delete from cons_med where num_consulta = $1;",[id],(err,result)=>{

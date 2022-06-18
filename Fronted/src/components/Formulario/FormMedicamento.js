@@ -8,8 +8,9 @@ import {
     ModalFooter
 } from "reactstrap";
 import { useState } from "react";
-const FormMedicamento = (props) => {
+const App = (props) => {
     const [form, setForm] = useState(props.item)
+    // Función que controla los cambios en los imputs
     const handleChange = (e) => {
         let target = e.target
         setForm({
@@ -20,7 +21,7 @@ const FormMedicamento = (props) => {
     }
     return (
         <>
-            <Modal isOpen={true} size="lg" style={{ maxWidth: '1280px', width: '95%', position: 'absolute', top: '45%', right: '50%', transform: 'translate(50%,-50%)' }}>
+            <Modal isOpen={true} size="lg" style={{ maxWidth: '540px', width: '95%', position: 'absolute', top: '45%', right: '50%', transform: 'translate(50%,-50%)' }}>
                 <ModalHeader>
                     <div><h3>{props.encabezado}</h3></div>
                 </ModalHeader>
@@ -107,4 +108,4 @@ const FormMedicamento = (props) => {
     );
 }
 
-export default FormMedicamento;
+export default App;
