@@ -10,7 +10,7 @@ import {
 
 // Import Table :: Components
 import TablaConsulta from "../components/TablaConsulta";
-import FormConsulta from "../components/Formulario/FormConsulta";
+import FormConsulta from "../components/forms/FormConsulta";
 import Mensaje from "../components/Mensaje";
 const ax = require("../api");
 class App extends Component {
@@ -73,7 +73,7 @@ class App extends Component {
             modalMensaje: true
         })
         let time = 3000;
-        if (type === "success"){
+        if (type === "success") {
             time = 1000;
         }
         setTimeout(() => {
@@ -233,7 +233,7 @@ class App extends Component {
                     this.actualizarTabla()
                 })
             }
-            setTimeout(()=>{this.mostrarMensaje(this.state.type)},50) 
+            setTimeout(() => { this.mostrarMensaje(this.state.type) }, 50)
         })
 
     };
@@ -289,7 +289,7 @@ class App extends Component {
                     })
                     setTimeout(() => {
                         resolve("done")
-                    },50);
+                    }, 50);
                 }).then(() => {
                     console.log(this.state.consultaActual)
                     if (form.medicamentos.length > 0) {
@@ -317,7 +317,7 @@ class App extends Component {
                         status: res.status,
                         type: "success"
                     });
-                    setTimeout(()=>{this.mostrarMensaje(this.state.type);},50) 
+                    setTimeout(() => { this.mostrarMensaje(this.state.type); }, 50)
                 })
 
             }
@@ -343,7 +343,9 @@ class App extends Component {
     render() {
 
         return (
-            <>{this.state.modalMensaje &&
+            <>
+            <div className='pt-5'>
+            {this.state.modalMensaje &&
                 <Mensaje
                     mostrar={this.state.modalMensaje}
                     status={this.state.status}
@@ -359,21 +361,22 @@ class App extends Component {
                     mostrarEliminar={this.mostrarModalEliminar}
                 />
                 {this.state.modalEliminar &&
-                    <Modal isOpen={this.state.modalEliminar} style={{ position: 'absolute', top: '45%', right: '50%', transform: 'translate(50%,-50%)' }}>
+                    <Modal isOpen={this.state.modalEliminar} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }}>
                         <ModalHeader>
                             <div><h3>Eliminar registro</h3></div>
-                            <ModalBody>
-                                <p className='text'>¿Esta seguro que desea eliminar este registro?</p>
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button
-                                    color="secondary"
-                                    onClick={() => this.eliminar()}>Eliminar</Button>
-                                <Button
-                                    color="danger"
-                                    onClick={() => this.cerrarModalEliminar()}>Cancelar</Button>
-                            </ModalFooter>
                         </ModalHeader>
+                        <ModalBody>
+                            <p className='text'>¿Esta seguro que desea eliminar este registro?</p>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button
+                                color="secondary"
+                                onClick={() => this.eliminar()}>Eliminar</Button>
+                            <Button
+                                color="danger"
+                                onClick={() => this.cerrarModalEliminar()}>Cancelar</Button>
+                        </ModalFooter>
+
                     </Modal>
                 }
                 {this.state.modalActualizar &&
@@ -413,6 +416,7 @@ class App extends Component {
                         />
                     </Modal>
                 }
+                </div>
             </>
         );
     }

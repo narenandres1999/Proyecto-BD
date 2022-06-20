@@ -1,3 +1,36 @@
+/* Estilos CRUD */
+.content {
+    display:flex;
+    padding: 50px;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tablas */
+thead > tr {
+    font-size: 14px;
+}
+
+tr {
+    font-size: 14px;
+    text-align: left;
+}
+
+th {
+    text-transform: initial;
+}
+
+.table {
+    margin: 0px auto;
+    width: 100% !important; 
+    margin-top: 50px;
+}
+
+.table-thead {
+    border-radius: 10px !important;
+}
+
 .acciones {
     display:flex;
     align-items: center;
@@ -14,26 +47,10 @@
     padding: 5px 10px;
 }
 
-thead > tr {
-    font-size: 14px;
-}
-
-tr {
-    font-size: 14px;
-    text-align: left;
-}
-
-th {
-    text-transform: initial;
-}
-
-.table-thead {
-    border-radius: 10px !important;
-}
-
+/* Header CRUD */
 .main-components {
-    width: 100%;
-    margin: 20px 10px;
+    width: 95%;
+    margin: 20px auto;
     display:flex;
     flex-flow: row wrap;
     align-items: center;
@@ -97,6 +114,8 @@ div > h3 {
 }
 
 .pagination {
+    width: 95%;
+    margin: 0px auto;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -208,4 +227,9 @@ div > h3 {
 
 .content-row {
     display:flex;
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #e9ecef;
+    opacity: 0.5;
 }

@@ -10,6 +10,7 @@ import {
 import Select from 'react-select'
 import { useState } from "react";
 import AddMedicamentos from "./components/AddMedicamentos";
+
 const App = (props) => {
     const [form, setForm] = useState(props.item)
     const options = [
@@ -41,7 +42,7 @@ const App = (props) => {
     }
     return (
         <>
-            <Modal isOpen={true} size="lg" style={{ maxWidth: '1280px', width: '95%', position: 'absolute', top: '45%', right: '50%', transform: 'translate(50%,-50%)' }}>
+            <Modal isOpen={true} size="lg" style={{ maxWidth: '1280px', width: '95%', position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%,-50%)' }}>
                 <ModalHeader>
                     <div><h3>{props.encabezado}</h3></div>
                 </ModalHeader>
@@ -73,9 +74,7 @@ const App = (props) => {
                                         value={form.nombre}
                                     />
 
-                                    <label>
-                                        Codigo de estudiante:
-                                    </label>
+                                    <label>Codigo de estudiante:</label>
                                     <input
                                         className="form-control"
                                         name="cod_paciente"
@@ -98,6 +97,7 @@ const App = (props) => {
                                         onChange={changeGen}
                                         className="select"
                                         name="genero"
+                                        placeholder='Seleccionar'
                                     />
 
                                     <label>
@@ -115,9 +115,7 @@ const App = (props) => {
 
                             <Row className='row row-md'>
                                 <Col md={12} className='col'>
-                                    <label>
-                                        Motivo de Consulta:
-                                    </label>
+                                    <label>Motivo de Consulta:</label>
                                     <input
                                         className="form-control"
                                         name="motivo"
@@ -126,9 +124,7 @@ const App = (props) => {
                                         value={form.motivo}
                                     />
 
-                                    <label>
-                                        Fecha de consulta:
-                                    </label>
+                                    <label>Fecha de consulta:</label>
                                     <input
                                         className="form-control"
                                         name="fecha_consulta"
@@ -137,9 +133,7 @@ const App = (props) => {
                                         onChange={handleChange}
                                         value={form.fecha_consulta}
                                     />
-                                    <label>
-                                        Nombre Encargado:
-                                    </label>
+                                    <label>Nombre Encargado:</label>
                                     <input
                                         className="form-control"
                                         name="encargado"

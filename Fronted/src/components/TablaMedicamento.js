@@ -26,16 +26,16 @@ const App = (props) => {
   }
   return (
     <>
-
+    <div className="content">
       <div className='main-components'>
         <div className='title-components'>
 
           <h1>Medicamentos</h1></div>
 
-        <div class="search-div input-group rounded">
+        <div className="search-div input-group rounded">
           <input
             type="search"
-            class="form-control rounded"
+            className="form-control rounded"
             placeholder="Buscar"
             aria-label="Search"
             aria-describedby="search-addon"
@@ -69,7 +69,7 @@ const App = (props) => {
                 <th className='acciones-title'>Acciones</th>
               </tr>
             </thead>
-            <tbody style={{ overflow: 'auto' }}>
+            <tbody>
               {props.list
                 .filter(item =>
                   item.med_nombre.toLowerCase().includes(search) ||
@@ -99,6 +99,7 @@ const App = (props) => {
           </Table>
         }
       </Container>
+      </div>
     </>
   );
 }

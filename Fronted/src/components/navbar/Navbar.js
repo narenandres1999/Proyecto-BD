@@ -13,6 +13,8 @@ import { SidebarData } from '../../data/SidebarData';
 // Import image
 import logo from '../../assets/logo.png';
 
+import {BiDevices} from 'react-icons/bi'
+
 function Navbar() {
 
     const [sidebar, setSidebar] = useState(false)
@@ -44,7 +46,14 @@ function Navbar() {
                         )
                     })}
                 </ul>
+
+                <div className='nav-text'>
+                    <p><BiDevices /></p>
+                    <p>Version 0.1</p>
+                 </div>
             </nav>
+
+
         </>
     )
 }

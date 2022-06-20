@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 // CSS
 import './index.css';
 import React from 'react'
@@ -16,19 +17,17 @@ import Error from './pages/Error'
 // Import components
 import Navbar from './components/navbar/Navbar'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('app'));
 root.render(
-  <React.StrictMode>
-                <Router>
-                <Navbar />
-                <div className='container'>
-                    <Routes>
-                        <Route path='/' exact element={<Inicio />} />                     
-                        <Route path='/consultas' element={<Consultas />} />
-                        <Route path='/medicamentos' element={<Medicamentos />} />
-                        <Route path='*' element={<Error />} />
-                    </Routes>
-                </div>
-            </Router>
-  </React.StrictMode>
+    <React.StrictMode>
+        <Router>
+            <Navbar />
+            <Routes>
+                <Route path='/' exact element={<Inicio />} />
+                <Route path='/consultas' element={<Consultas />} />
+                <Route path='/medicamentos' element={<Medicamentos />} />
+                <Route path='*' element={<Error />} />
+            </Routes>
+        </Router>
+    </React.StrictMode>
 );

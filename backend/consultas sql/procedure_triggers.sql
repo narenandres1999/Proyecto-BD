@@ -54,3 +54,5 @@ $aumentar$ language plpgsql;
 
 create or replace TRIGGER aumentar before DELETE on cons_med
 for each row EXECUTE function aumentarStock();
+
+create or replace view consulta_total as select * from consultas natural join paciente;

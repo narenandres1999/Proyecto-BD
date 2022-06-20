@@ -18,7 +18,7 @@ const validateCreate = [ // encargado,motivo,fecha_consulta,cod_paciente,genid,n
         .exists()
         .not()
         .isEmpty().withMessage("ingrese el código del estudiante")
-        .isNumeric().withMessage("solo se permiten valores numericos"),
+        .isNumeric().withMessage("solo se permiten valores numericos para el codigo del estudiante"),
     check('fecha_consulta')
         .exists()
         .not().isEmpty().withMessage("Por favor ingresar una fecha")
@@ -37,7 +37,13 @@ const validateCreate = [ // encargado,motivo,fecha_consulta,cod_paciente,genid,n
         .not().isEmpty().withMessage("Por favor ingresar el nombre de un encargado"),
     check('telefono')
         .exists()
-        .not().isEmpty().withMessage("por favor ingrese un telefono"),
+        .not().isEmpty().withMessage("por favor ingrese un telefono")
+        .custom((value,{req})=>{
+            if (isNaN(value)){
+                throw new Error("El telefono debe contener solo números")
+            }
+            return true;
+        }),
     check('motivo')
         .exists(),
     (req, res, next) => {

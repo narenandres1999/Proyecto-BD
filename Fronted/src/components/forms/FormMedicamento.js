@@ -7,6 +7,8 @@ import {
     ModalBody,
     ModalFooter
 } from "reactstrap";
+import '../StyleComponents.css'
+
 import { useState } from "react";
 const App = (props) => {
     const [form, setForm] = useState(props.item)
@@ -21,7 +23,7 @@ const App = (props) => {
     }
     return (
         <>
-            <Modal isOpen={true} size="lg" style={{ maxWidth: '540px', width: '95%', position: 'absolute', top: '45%', right: '50%', transform: 'translate(50%,-50%)' }}>
+            <Modal isOpen={true} style={{ maxWidth: '540px', width: '90%', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }}>
                 <ModalHeader>
                     <div><h3>{props.encabezado}</h3></div>
                 </ModalHeader>
@@ -53,9 +55,7 @@ const App = (props) => {
                                         value={form.med_nombre}
                                     />
 
-                                    <label>
-                                        Codigo de medicamento:
-                                    </label>
+                                    <label>Codigo de medicamento:</label>
                                     <input
                                         className="form-control"
                                         name="cod_med"
@@ -68,9 +68,7 @@ const App = (props) => {
 
                             <Row className='row row-md'>
                                 <Col md={12} className='col'>
-                                    <label>
-                                        Cantidad de inventario:
-                                    </label>
+                                    <label>Cantidad de inventario:</label>
                                     <input
                                         className="form-control"
                                         name="stock"
@@ -78,9 +76,7 @@ const App = (props) => {
                                         onChange={handleChange}
                                         value={form.stock}
                                     />
-                                    <label>
-                                        Fecha de vencimiento:
-                                    </label>
+                                    <label>Fecha de vencimiento:</label>
                                     <input
                                         className="form-control"
                                         name="fecha_ven"

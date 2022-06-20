@@ -26,15 +26,16 @@ const App = (props) => {
   }
   return (
     <>
+    <div className="content">
 
       <div className='main-components'>
         <div className='title-components'>
 
           <h1>Consultas medicas</h1></div>
-        <div class="search-div input-group rounded">
+        <div className="search-div input-group rounded">
           <input
             type="search"
-            class="form-control rounded"
+            className="form-control rounded"
             placeholder="Buscar"
             aria-label="Search"
             aria-describedby="search-addon"
@@ -55,60 +56,61 @@ const App = (props) => {
           handleClick={handleClick}
           pagesCount={pagesCount}
         />
-        
-        <Loading hidden = {props.hidden}/>
-        { props.hidden &&
-        <Table className='table table-borderless table-hover' style={{ width: '100%' }}>
-          <thead className='table-light table-thead'>
-            <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Codigo de estudiante</th>
-              <th>Genero</th>
-              <th>Telefono</th>
-              <th>Motivo</th>
-              <th>Fecha de consulta</th>
-              <th>Firma</th>
-              <th className='acciones-title'>Acciones</th>
-            </tr>
-          </thead>
-          <tbody style={{ overflow: 'auto' }}>
-            {props.list
-              .filter(item =>
-                item.nombre.includes(search) ||
-                item.genero.includes(search) ||
-                item.encargado.includes(search) ||
-                // ToLowerCase
-                item.nombre.toLowerCase().includes(search) ||
-                item.genero.toLowerCase().includes(search) ||
-                item.cod_paciente.toString().includes(search) ||
-                item.fecha_consulta.includes(search) ||
-                item.encargado.toLowerCase().includes(search)
-              )
-              .slice(
-                currentPage * pageSize,
-                (currentPage + 1) * pageSize
-              )
-              .map((item) => (
-                <tr key={item.num_consulta} >
-                  <td>{item.num_consulta}</td>
-                  <td>{item.nombre}</td>
-                  <td>{item.cod_paciente}</td>
-                  <td>{item.genero}</td>
-                  <td>{item.telefono}</td>
-                  <td>{item.motivo}</td>
-                  <td>{item.fecha_consulta}</td>
-                  <td>{item.encargado}</td>
-                  <td className='acciones'>
-                    <Button color="secondary" onClick={() => props.mostrarEditar(item)}><MdEdit /></Button>
-                    <Button color="danger" onClick={() => props.mostrarEliminar(item)}><MdDelete /></Button>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </Table>
+
+        <Loading hidden={props.hidden} />
+        {props.hidden &&
+          <Table className='table table-borderless table-hover' style={{ width: '100%' }}>
+            <thead className='table-light table-thead'>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Codigo de estudiante</th>
+                <th>Genero</th>
+                <th>Telefono</th>
+                <th>Motivo</th>
+                <th>Fecha de consulta</th>
+                <th>Firma</th>
+                <th className='acciones-title'>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {props.list
+                .filter(item =>
+                  item.nombre.includes(search) ||
+                  item.genero.includes(search) ||
+                  item.encargado.includes(search) ||
+                  // ToLowerCase
+                  item.nombre.toLowerCase().includes(search) ||
+                  item.genero.toLowerCase().includes(search) ||
+                  item.cod_paciente.toString().includes(search) ||
+                  item.fecha_consulta.includes(search) ||
+                  item.encargado.toLowerCase().includes(search)
+                )
+                .slice(
+                  currentPage * pageSize,
+                  (currentPage + 1) * pageSize
+                )
+                .map((item) => (
+                  <tr key={item.num_consulta} >
+                    <td>{item.num_consulta}</td>
+                    <td>{item.nombre}</td>
+                    <td>{item.cod_paciente}</td>
+                    <td>{item.genero}</td>
+                    <td>{item.telefono}</td>
+                    <td>{item.motivo}</td>
+                    <td>{item.fecha_consulta}</td>
+                    <td>{item.encargado}</td>
+                    <td className='acciones'>
+                      <Button color="secondary" onClick={() => props.mostrarEditar(item)}><MdEdit /></Button>
+                      <Button color="danger" onClick={() => props.mostrarEliminar(item)}><MdDelete /></Button>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </Table>
         }
       </Container>
+      </div>
     </>
   );
 }

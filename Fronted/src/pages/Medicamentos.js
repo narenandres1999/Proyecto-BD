@@ -9,7 +9,7 @@ import {
 } from "reactstrap";
 // Import Table :: Components
 import TablaMedicamento from "../components/TablaMedicamento";
-import FormMedicamento from "../components/Formulario/FormMedicamento";
+import FormMedicamento from "../components/forms/FormMedicamento";
 import Mensaje from '../components/Mensaje';
 const ax = require("../api");
 class App extends Component {
@@ -221,6 +221,7 @@ class App extends Component {
 
         return (
             <>
+            <div className='pt-5'>
                 {this.state.modalMensaje &&
                     <Mensaje
                         mostrar={this.state.modalMensaje}
@@ -238,21 +239,22 @@ class App extends Component {
                     mostrarEliminar={this.mostrarModalEliminar}
                 />
                 {this.state.modalEliminar &&
-                    <Modal isOpen={this.state.modalEliminar} style={{ position: 'absolute', top: '45%', right: '50%', transform: 'translate(50%,-50%)' }}>
+                    <Modal isOpen={this.state.modalEliminar} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }}>
                         <ModalHeader>
                             <div><h3>Eliminar registro</h3></div>
-                            <ModalBody>
-                                <p className='text'>¿Esta seguro que desea eliminar este registro?</p>
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button
-                                    color="secondary"
-                                    onClick={() => this.eliminar()}>Eliminar</Button>
-                                <Button
-                                    color="danger"
-                                    onClick={() => this.cerrarModalEliminar()}>Cancelar</Button>
-                            </ModalFooter>
                         </ModalHeader>
+                        <ModalBody>
+                            <p className='text'>¿Esta seguro que desea eliminar este registro?</p>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button
+                                color="secondary"
+                                onClick={() => this.eliminar()}>Eliminar</Button>
+                            <Button
+                                color="danger"
+                                onClick={() => this.cerrarModalEliminar()}>Cancelar</Button>
+                        </ModalFooter>
+
                     </Modal>
                 }
                 {this.state.modalActualizar &&
@@ -290,6 +292,7 @@ class App extends Component {
                         />
                     </Modal>
                 }
+                </div>
             </>
         );
     }
