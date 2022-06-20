@@ -54,6 +54,28 @@ Para este proyecto se usará la arquitectura de micro  servicios, ya que nos per
 - Metodologías de desarrollo de software
 - Wireframes
 - Metodologías ágiles
+<<<<<<< HEAD
 - Arquitecturas de Software 
 
 
+=======
+- Arquitecturas de Software
+
+## Como iniciar o instalar nuestro proyecto
+
+Instrucciones sobre cómo configurar su proyecto localmente.
+Para obtener una copia local en funcionamiento, siga estos sencillos pasos de ejemplo.
+
+### Instalacion
+
+_A continuación se muestra un ejemplo sobre la instalación y configuración de la aplicación._
+
+1. Clonar el repositorio
+   ```sh
+   git clone https://github.com/baronrrojo/Proyecto-BD.git
+   ```
+2. Instalar paquetes NPM
+   ```sh
+   npm install --legacy-peer-deps
+   ```
+>>>>>>> origin
