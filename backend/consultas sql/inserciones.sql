@@ -5,7 +5,7 @@ insert into medicamentos (cod_med,med_nombre,fecha_ven,stock) Values
 
 insert into paciente (cod_paciente,telefono,genero,nombre) values
 (2059393,3145454822,'Masculino','Naren Andres Medina Jaramillo'),
-(2059383,316,'Femenino','Juan David Rios');
+(2059383,3162719488,'Masculino','Juan David Rios');
 insert into consultas (encargado,motivo,fecha_consulta,cod_paciente) values
 ('Pedrito','Dolor de cabeza','2022-05-28',2059393),
 ('Pedrito','Dolor de cabeza','2022-05-28',2059383);
