@@ -1,3 +1,5 @@
+
+
 # Proyecto - Base de datos & Desarrollo de software | Tecnologia en sistemas de información (Universidad del Valle)
 ## Gestor de enfermeria
 Este proyecto de aplicativo presenta una solución sobre el actual manejo del sistema de consultas y el registro de medicamentos en el ámbito de enfermería de la Universidad del Valle Sede Palmira, para lo cual consideramos que automatizar su uso mejoraría la eficiencia y rapidez del trabajo del personal encargado, facilitandoles el acceso y disponibilidad inmediata. Además, ofrecería atención de calidad a los alumnos, personal docente y administrativo, permitiendo también mejorar el manejo de información mediante la generación de documentos inmediatos para su uso o corrección.
@@ -54,6 +56,22 @@ Para este proyecto se usará la arquitectura de micro  servicios, ya que nos per
 - Metodologías de desarrollo de software
 - Wireframes
 - Metodologías ágiles
-- Arquitecturas de Software 
+- Arquitecturas de Software
 
+## Como iniciar o instalar nuestro proyecto
 
+Instrucciones sobre cómo configurar su proyecto localmente.
+Para obtener una copia local en funcionamiento, siga estos sencillos pasos de ejemplo.
+
+### Instalacion
+
+_A continuación se muestra un ejemplo sobre la instalación y configuración de la aplicación._
+
+1. Clonar el repositorio
+   ```sh
+   git clone https://github.com/baronrrojo/Proyecto-BD.git
+   ```
+2. Instalar paquetes NPM
+   ```sh
+   npm install --legacy-peer-deps
+   ```
