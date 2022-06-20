@@ -14,16 +14,29 @@ const App = (props) => {
   // Inicio de los elementos necesarios para la paginación
   const pageSize = 5
   const [currentPage, setCurrentPage] = useState(0)
-  const pagesCount = Math.ceil(props.list.length / pageSize)
   const handleClick = (e, index) => {
     e.preventDefault();
     setCurrentPage(index)
   }
   // Fin De los elementos necesarios para la paginación
 
-  const filter = (e) => {
+  const onChange = (e) => {
     setSearch(e.target.value)
+    setCurrentPage(0)
   }
+  const filter = ()=>{
+    return props.list
+    .filter(item =>
+      item.med_nombre.toLowerCase().includes(search) ||
+      item.cod_med.toLowerCase().includes(search) ||
+      item.med_nombre.includes(search) ||
+      item.cod_med.includes(search) ||
+      item.med_nombre.toUpperCase().includes(search) ||
+      item.cod_med.toUpperCase().includes(search)
+    )
+  }
+  
+  const pagesCount = Math.ceil(filter().length / pageSize)
   return (
     <>
     <div className="content">
@@ -41,7 +54,7 @@ const App = (props) => {
             aria-describedby="search-addon"
             name="search"
             value={search}
-            onChange={filter}
+            onChange={onChange}
           />
 
         </div>
@@ -70,14 +83,7 @@ const App = (props) => {
               </tr>
             </thead>
             <tbody>
-              {props.list
-                .filter(item =>
-                  item.med_nombre.toLowerCase().includes(search) ||
-                  item.cod_med.toLowerCase().includes(search) ||
-                  item.id_med.toString().includes(search) ||
-                  item.med_nombre.includes(search) ||
-                  item.cod_med.includes(search) 
-                )
+              {filter()
                 .slice(
                   currentPage * pageSize,
                   (currentPage + 1) * pageSize

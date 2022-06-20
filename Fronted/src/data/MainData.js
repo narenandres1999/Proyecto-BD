@@ -1,6 +1,7 @@
 import { AiOutlineHtml5 } from "react-icons/ai";
-import { FaReact } from "react-icons/fa";
-import { SiPostgresql, SiVisualstudiocode } from 'react-icons/si'
+import { FaReact, FaNode } from "react-icons/fa";
+import { SiPostgresql, SiVisualstudiocode, SiExpress } from 'react-icons/si'
+import { GiTeacher } from 'react-icons/gi'
 import { IoPersonCircleSharp } from 'react-icons/io5'
 
 export const IntegrantesData = [
@@ -46,11 +47,13 @@ export const DocentesData = [
     {
         nombre: 'JOHN ALEXANDER CAMACHO SANCHEZ',
         asignatura: 'DESARROLLO DE SOFTWARE',
+        icon: <GiTeacher />,     
         cName: 'item'        
     },  
     {
         nombre: 'JEFFERSON A. PEÑA TORRES',
         asignatura: 'BASE DE DATOS',
+        icon: <GiTeacher />,     
         cName: 'item'        
     }    
 ]
@@ -75,5 +78,15 @@ export const Tecnologias = [
         icono: <SiVisualstudiocode />,
         nombre: 'VS Code',
         cName: 'tecnologias-item'
-    }      
+    },    
+    {
+        icono: <FaNode />,
+        nombre: 'NODE',
+        cName: 'tecnologias-item'
+    },    
+    {
+        icono: <SiExpress />,
+        nombre: 'Express',
+        cName: 'tecnologias-item'
+    }   
 ]

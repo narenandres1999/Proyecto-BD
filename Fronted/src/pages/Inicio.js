@@ -7,7 +7,7 @@ import './Style.css'
 import './Inicio.css'
 
 // Datos externos
-import { IntegrantesData, Tecnologias } from '../data/MainData';
+import { IntegrantesData, DocentesData, Tecnologias } from '../data/MainData';
 import enfermera from '../assets/enfermera.png'
 import Footer from '../components/footer/Footer'
 
@@ -33,7 +33,7 @@ export default class Inicio extends Component {
           </Container>
 
           <Container>
-            <Row>
+            <Row className='w-100'>
               <Col>
                 <div className='theme-content tecnologias-content'>
                   <h2>Tecnologias usadas para este proyecto</h2>
@@ -64,7 +64,7 @@ export default class Inicio extends Component {
               </Col>
 
               <Col md={6}>
-              <ul className='item-list'>
+              <ul className='item-list centered'>
                   {IntegrantesData.map((item, index) => {
                     return (
                       <li key={index} className={item.cName}>
@@ -77,6 +77,31 @@ export default class Inicio extends Component {
               </Col>
             </Row>
           </Container>
+
+          <Container>
+            <Row>
+              <Col md={6}>
+                <div className='theme-content flex-column d-flex justify-content-center align-self-center centered'>
+                  <h2>Docentes del proyecto</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nisi odio, egestas eget diam ut, tincidunt hendrerit lorem. Vivamus odio urna, pharetra quis enim ut, eleifend semper ex.</p>
+                </div>
+              </Col>
+
+              <Col md={6}>
+                <ul className='item-list centered'>
+                  {DocentesData.map((item, index) => {
+                    return (
+                      <li key={index} className={item.cName}>
+                        <i>{item.icon}</i>
+                        <p>{item.nombre}</p>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </Col>
+            </Row>
+          </Container>  
+
           <Footer />
         </div>
       </>
