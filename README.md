@@ -37,10 +37,10 @@ Para este proyecto se usará la arquitectura de micro  servicios, ya que nos per
 
 ## Autores de este proyecto
 
-- [Andres Felipe Osorio Alarcon](https://www.github.com/andresalarconCO)
-- [Naren Andres Medina Jaramillo](https://www.github.com/baronrrojo)
-- [Alejandro Arenas Rodriguez](https://www.github.com/sneykrz)
-- [Juan David Rios Riascos](https://www.github.com/JuanDRK)
+- [Andres Felipe Osorio Alarcon (DEV)](https://www.github.com/andresalarconCO)
+- [Naren Andres Medina Jaramillo (DEV)](https://www.github.com/baronrrojo)
+- [Alejandro Arenas Rodriguez (DEV)](https://www.github.com/sneykrz)
+- [Juan David Rios Riascos (DEV)](https://www.github.com/JuanDRK)
 
 # Temas de base de datos
 - Conceptos de BD
